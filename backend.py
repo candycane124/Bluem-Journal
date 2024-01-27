@@ -26,3 +26,5 @@ class Backend:
     
     def get_points(self):
         return self.db_manager.get_points(self.user_id)
+    
+    
