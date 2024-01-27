@@ -2,6 +2,7 @@ WindowManager:
     MainWindow:
     JournalWindow:
     HistoryWindow:
+    GratitudeJarApp:
 
 <MainWindow>:
     name: "main"
@@ -16,15 +17,23 @@ WindowManager:
         Button:
             text: "New Entry"
             size_hint: (0.3, 0.2)
-            pos_hint: {'center_x': 0.3, 'center_y': 0.3}
+            pos_hint: {'center_x': 0.2, 'center_y': 0.3}
             on_release:
                 app.root.current = "journal"
+                root.manager.transition.direction = "left"
+        
+        Button:
+            text: "New Gratitude"
+            size_hint: (0.3, 0.2)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            on_release:
+                app.root.current = "gratitude"
                 root.manager.transition.direction = "left"
 
         Button:
             text: "See Previous Entries"
             size_hint: (0.3, 0.2)
-            pos_hint: {'center_x': 0.7, 'center_y': 0.3}
+            pos_hint: {'center_x': 0.8, 'center_y': 0.3}
             on_release:
                 app.root.current = "history"
                 root.manager.transition.direction = "left"
@@ -79,3 +88,41 @@ WindowManager:
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
+
+
+
+<GratitudeJarApp>:
+    name: 'gratitude'
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+        size_hint_y: None
+        height: 500
+
+        Image:
+            source: 'garden background.png'
+            size: 1000, 800
+            size_hint: None, None
+            allow_stretch: True
+            keep_ratio: False
+
+        Label:
+            text: 'What are you grateful for today?'
+            font_size: 20
+
+        TextInput:
+            hint_text: 'Enter your gratitude...'
+            multiline: False
+            font_size: 14
+
+        Button:
+            text: 'Add Gratitude'
+            # on_press: root.add_gratitude(self)
+            font_size: 14
+            background_color: 0, 1, 0, 1
+
+        Label:
+            # text: root.gratitude_display.text
+            font_size: 14
