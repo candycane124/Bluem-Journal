@@ -63,7 +63,9 @@ WindowManager:
 
         Button:
             text: "New Entry"
-            size_hint: (0.2, 0.1)
+            font_size: '30sp'
+            font_name: 'HGS'
+            size_hint: (0.25, 0.1)
             pos_hint: {'center_x': 0.2, 'center_y': 0.1}
             on_release:
                 app.root.current = "journal"
@@ -71,15 +73,19 @@ WindowManager:
         
         Button:
             text: "New Gratitude"
-            size_hint: (0.2, 0.1)
+            font_size: '30sp'
+            font_name: 'HGS'
+            size_hint: (0.25, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_release:
                 app.root.current = "gratitude"
                 root.manager.transition.direction = "left"
 
         Button:
-            text: "See Previous Entries"
-            size_hint: (0.2, 0.1)
+            text: "Previous Entries"
+            font_size: '30sp'
+            font_name: 'HGS'
+            size_hint: (0.25, 0.1)
             pos_hint: {'center_x': 0.8, 'center_y': 0.1}
             on_release:
                 app.root.current = "history"
