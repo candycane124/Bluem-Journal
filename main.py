@@ -10,18 +10,20 @@ class MainWindow(Screen):
 class JournalWindow(Screen):
     def save_btn_press(self):
         self.backend = Backend()
-        # TO-DO: store 'entered_text'/'self.entry.text' to database
         entered_text = self.entry.text
-        self.backend.save_text(entered_text) # doesn't work right now
+        self.backend.record_entry(123, entered_text) # fix user id
         print(entered_text)
         self.entry.text = ""
 
 class HistoryWindow(Screen):    
     def show_btn_press(self):
         self.backend = Backend()
-        # TO-DO: get entries from database and set 'self.entries.text' equal to it
-        last_entry = self.backend.get_last_entry()
-        self.entries.text = last_entry
+        entries = self.backend.get_last_five_entries(123) # fix user id
+        print(entries)
+        finalStr = "" 
+        for entry in entries:
+            finalStr += entry[2] + "\n"
+        self.entries.text = finalStr
     # pass
 
 class WindowManager(ScreenManager):
