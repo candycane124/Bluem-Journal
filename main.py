@@ -1,47 +1,40 @@
-# main.py
-import kivy
 from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
-from kivy.uix.textinput import TextInput
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import ObjectProperty
 from backend import Backend
 
-kivy.require('2.0.0')
+class MainWindow(Screen):
+    pass
 
-class SimpleApp(App):
+class JournalWindow(Screen):
+    def save_btn_press(self):
+        self.backend = Backend()
+        # TO-DO: store 'entered_text'/'self.entry.text' to database
+        entered_text = self.entry.text
+        self.backend.save_text(entered_text) # doesn't work right now
+        print(entered_text)
+        self.entry.text = ""
+
+class HistoryWindow(Screen):    
+    def show_btn_press(self):
+        self.backend = Backend()
+        # TO-DO: get entries from database and set 'self.entries.text' equal to it
+        last_entry = self.backend.get_last_entry()
+        self.entries.text = last_entry
+    # pass
+
+class WindowManager(ScreenManager):
+    pass
+
+kv = Builder.load_file("my.kv")
+
+class MyApp(App):
     def build(self):
         self.backend = Backend()
-        
-        layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
-        self.label = Label(text='Enter text below and press the button')
+        entry = ObjectProperty(None)
+        entries = ObjectProperty(None)
+        return kv
 
-        self.textinput = TextInput(text='', multiline=False)
-
-        save_btn = Button(text='Submit')
-        save_btn.bind(on_press=self.on_save_button_press)
-
-        self.last_entry_label = Label(text='Last entry will be shown here')
-
-        show_last_entry_btn = Button(text='Show Last Entry')
-        show_last_entry_btn.bind(on_press=self.on_show_last_entry_press)
-
-        layout.add_widget(self.label)
-        layout.add_widget(self.textinput)
-        layout.add_widget(save_btn)
-        layout.add_widget(self.last_entry_label)
-        layout.add_widget(show_last_entry_btn)
-
-        return layout
-
-    def on_save_button_press(self, instance):
-        entered_text = self.textinput.text
-        result = self.backend.save_text(entered_text)
-        self.label.text = result
-
-    def on_show_last_entry_press(self, instance):
-        last_entry = self.backend.get_last_entry()
-        self.last_entry_label.text = f"Last entry: {last_entry}"
-
-if __name__ == '__main__':
-    SimpleApp().run()
+if __name__ == "__main__":
+    MyApp().run()

@@ -1,0 +1,82 @@
+WindowManager:
+    MainWindow:
+    JournalWindow:
+    HistoryWindow:
+
+<MainWindow>:
+    name: "main"
+    
+    GridLayout:
+        cols: 1
+
+        GridLayout:
+            cols: 3
+
+            Label:
+                text: "name of app goes here"
+
+        GridLayout:
+            cols: 2
+
+            Button:
+                text: "New Entry"
+                on_release:
+                    app.root.current = "journal"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text: "See Previous Entries"
+                on_release:
+                    app.root.current = "history"
+                    root.manager.transition.direction = "left"
+
+
+<JournalWindow>:
+    name: "journal"
+
+    entry: entry
+
+    GridLayout:
+        cols: 1
+
+        Label:
+            text: "How are you feeling?"
+        
+        TextInput:
+            id: entry
+            multiline: False
+
+        GridLayout:
+            cols: 2
+
+            Button:
+                text: "Back"
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+            
+            Button:
+                text: "Submit"
+                on_press: root.save_btn_press()
+
+<HistoryWindow>:
+    name: "history"
+    entries: entries
+
+    GridLayout:
+        cols: 1
+        # size: root.width, root.height
+
+        Button:
+            text: "show most recent entry"
+            on_press: root.show_btn_press()
+
+        Label:
+            id: entries
+            text: ""
+        
+        Button:
+            text: "Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
