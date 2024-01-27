@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
 from backend import Backend
 from kivy.core.window import Window
+from kivy.properties import StringProperty
 
 class MainWindow(Screen):
     pass
@@ -17,12 +18,21 @@ class Login(Screen):
         self.entry.text = ""
 
 class JournalWindow(Screen):
+    feeling_label_text = StringProperty("How are you feeling?")
+
     def save_btn_press(self):
         backend = App.get_running_app().backend
         entered_text = self.entry.text
         backend.record_entry(entered_text) # fix user id
         print(entered_text)
         self.entry.text = ""
+
+    def ask_btn_press(self):
+        backend = App.get_running_app().backend
+        entered_text = self.entry.text
+        #question_prompt = backend.question_prompt(entered_text)
+        question_prompt = "New Question?"
+        self.feeling_label_text = question_prompt
 
 class HistoryWindow(Screen):    
     def show_btn_press(self):

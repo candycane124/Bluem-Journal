@@ -124,7 +124,7 @@ WindowManager:
             allow_stretch: True
 
         Label:
-            text: "How are you feeling?"
+            text: root.feeling_label_text
             color: 0.3, 0.6, 0.6, 1
             font_name: 'HGS'
             font_size: '40sp'
@@ -142,20 +142,30 @@ WindowManager:
             text: "Back"
             font_name: 'HGS'
             font_size: '30sp'
-            size_hint: (0.2, 0.1)
-            pos_hint: {'center_x': 0.3, 'center_y': 0.2}
+            size_hint: (0.125, 0.1)
+            pos_hint: {'center_x': 0.35, 'center_y': 0.2}
             on_press:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
 
         Button:
-            text: "Submit"
+            text: "Ask"
             font_name: 'HGS'
             font_size: '30sp'
-            size_hint: (0.2, 0.1)
-            pos_hint: {'center_x': 0.7, 'center_y': 0.2}
+            size_hint: (0.125, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+            on_press:
+                root.ask_btn_press()
+
+        Button:
+            text: "Finish"
+            font_name: 'HGS'
+            font_size: '30sp'
+            size_hint: (0.125, 0.1)
+            pos_hint: {'center_x': 0.65, 'center_y': 0.2}
             on_press:
                 root.save_btn_press()
+
 
 <HistoryWindow>:
     name: "history"
