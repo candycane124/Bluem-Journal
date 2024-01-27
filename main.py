@@ -34,6 +34,9 @@ class HistoryWindow(Screen):
         self.entries.text = finalStr
     # pass
 
+class GratitudeJarApp(Screen):
+    pass
+
 class WindowManager(ScreenManager):
     pass
 

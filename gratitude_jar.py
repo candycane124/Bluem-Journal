@@ -1,4 +1,3 @@
-# Import required Kivy modules
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
@@ -16,15 +15,15 @@ class GratitudeJarApp(App):
             spacing=10, 
             size_hint_y=None, 
             height=500, 
-            size_hint_x=None, 
-            width=250,
             )
-        #background_image= Image(source='pot_1.png')
-        #layout.add_widget(background_image)
-        with layout.canvas.before:
-            Color(0.8,0.2,0.3,1)
-            self.background=Rectangle(pos=layout.pos, size=layout.size)
-       
+        background_image= Image(source='garden background.png',
+                                                                size=(1000, 800),
+                                size_hint_x=None,
+                                size_hint_y=None,
+                                allow_stretch=True,
+                                keep_ratio=False)
+        layout.add_widget(background_image)
+
         # Create a label for instructions
         instructions = Label(text='What are you grateful for today?', font_size=20,)
         layout.add_widget(instructions)
