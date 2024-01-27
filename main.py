@@ -7,7 +7,9 @@ from kivy.core.window import Window
 from kivy.properties import StringProperty
 
 class MainWindow(Screen):
-    pass
+    def flower_pot_press(self):
+        backend = App.get_running_app().backend
+        backend.buy_flower(1) #fix user id
 
 class Login(Screen):
     def save_btn_press(self):
