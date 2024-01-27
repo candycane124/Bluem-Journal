@@ -1,11 +1,13 @@
 # backend.py
 from database_manager import DatabaseManager
 from datetime import datetime
+import random
 
 class Backend:
     def __init__(self):
         self.db_manager = DatabaseManager('app_data.db')
         self.user_id = None
+        self.flower_price = 1
 
     def login(self, user_id):
         self.user_id = user_id
@@ -27,4 +29,9 @@ class Backend:
     def get_points(self):
         return self.db_manager.get_points(self.user_id)
     
-    
+    def buy_flower(self, flower_number):
+        points = self.db_manager.get_points(self.user_id)
+        if points >= self.flower_price:
+            self.db_manager.subtract_points(self.user_id, self.flower_price)
+            flower_id = random.randint(1, 9)
+            self.db_manager.add_flower(self.user_id, flower_number, flower_id)

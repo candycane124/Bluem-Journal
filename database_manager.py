@@ -127,3 +127,25 @@ class DatabaseManager:
                 for i in range(1, 10):
                     image_path = f"flowers/f{i}.png"
                     conn.execute('INSERT INTO flowers (image_path) VALUES (?)', (image_path,))
+
+    def subtract_points(self, user_id, flower_price):
+        """ Remove the price of a flower from the user """
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        # Subtract points from the user's current points
+        cursor.execute('UPDATE users SET points = points - ? WHERE user_id = ?', (flower_price, user_id,))
+
+        conn.commit()
+        conn.close()
+
+    def add_flower(self, user_id, flower_number, flower_id):
+        """ Add a flower to the specified user """
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        # Update the specific flower column for the user
+        cursor.execute(f'UPDATE users SET flower{flower_number} = ? user_id = ?', (flower_id, user_id,))
+
+        conn.commit()
+        conn.close()
