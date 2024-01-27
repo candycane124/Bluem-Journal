@@ -10,6 +10,12 @@ WindowManager:
     entry: entry  # Bind the ObjectProperty to the TextInput
 
     FloatLayout
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
+            
         Label:
             text: "Input your user id"
             font_size: '40sp'
