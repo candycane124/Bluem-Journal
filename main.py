@@ -1,15 +1,17 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-# from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty
+from backend import Backend
+from kivy.core.window import Window
+from kivy.properties import StringProperty
 from kivymd.app import MDApp
 from kivymd.uix.list import OneLineListItem
-from kivy.uix.label import Label
-from backend import Backend
-import random
 
 class MainWindow(Screen):
-    pass
+    def flower_pot_press(self):
+        backend = App.get_running_app().backend
+        backend.buy_flower(1) #fix user id
 
 class Login(Screen):
     def save_btn_press(self):
@@ -20,25 +22,26 @@ class Login(Screen):
         self.entry.text = ""
 
 class JournalWindow(Screen):
-
-    prompt_file = open("prompts.txt","r")
-    prompts = prompt_file.read().split(", ")
-    prompt_file.close()
+    feeling_label_text = StringProperty("How are you feeling?")
 
     def save_btn_press(self):
         backend = App.get_running_app().backend
         entered_text = self.entry.text
-        backend.record_entry(entered_text)
+        backend.record_entry(entered_text) # fix user id
         print(entered_text)
         self.entry.text = ""
-    
-    def new_prompt(self):
-        self.prompt.text = self.prompts[random.randint(0,199)]
+
+    def ask_btn_press(self):
+        backend = App.get_running_app().backend
+        entered_text = self.entry.text
+        #question_prompt = backend.question_prompt(entered_text)
+        question_prompt = "New Question?"
+        self.feeling_label_text = question_prompt
 
 class HistoryWindow(Screen):    
     def show_btn_press(self):
         backend = App.get_running_app().backend
-        entries = backend.get_last_five_entries()
+        entries = backend.get_last_five_entries() # fix user id
         print(entries)
         finalStr = "" 
         for entry in entries:
@@ -58,13 +61,14 @@ class GratitudeJarApp(Screen):
 class WindowManager(ScreenManager):
     pass
 
-class MyApp(MDApp):
+class MyApp(App):
     backend = None
 
     def build(self):
+        self.backend = Backend()
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Pink"
-        self.backend = Backend()
+        Window.size = (650, 400)
         return Builder.load_file("my.kv")
 
 if __name__ == "__main__":

@@ -17,10 +17,14 @@ class DatabaseManager:
                 username TEXT NOT NULL,
                 password_hash TEXT NOT NULL,
                 points INTEGER DEFAULT 0,
-                streak INTEGER DEFAULT 0
+                streak INTEGER DEFAULT 0,
+                flower1 INTEGER DEFAULT 0,
+                flower2 INTEGER DEFAULT 0,
+                flower3 INTEGER DEFAULT 0
             );
         ''')
 
+        # Create 'journal entries' table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS journal_entries (
                 entry_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,6 +50,18 @@ class DatabaseManager:
                 hint_text TEXT NOT NULL
             );
         ''')
+
+        # Create the 'flowers' table
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS flowers (
+                id INTEGER PRIMARY KEY,
+                image_path TEXT NOT NULL
+            );
+        ''')
+
+        # Populate the 'flowers' table if it is empty
+        self.populate_flowers_table(conn)
 
         # Commit the changes and close the connection
         conn.commit()
@@ -107,7 +123,39 @@ class DatabaseManager:
         conn.close()
         return result
     
+    def check_table_empty_flowers(self, conn):
+        # Check if the flowers table is empty
+        cursor = conn.cursor()
+        cursor.execute('SELECT COUNT(*) FROM flowers')
+        count = cursor.fetchone()[0]
+        return count == 0
 
+    def populate_flowers_table(self, conn):
+            # Check if the flowers table is empty
+            if self.check_table_empty_flowers(conn):
+                # Insert flower images
+                for i in range(1, 10):
+                    image_path = f"flowers/f{i}.png"
+                    conn.execute('INSERT INTO flowers (image_path) VALUES (?)', (image_path,))
 
+    def subtract_points(self, user_id, flower_price):
+        """ Remove the price of a flower from the user """
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
 
+        # Subtract points from the user's current points
+        cursor.execute('UPDATE users SET points = points - ? WHERE user_id = ?', (flower_price, user_id,))
 
+        conn.commit()
+        conn.close()
+
+    def add_flower(self, user_id, flower_number, flower_id):
+        """ Add a flower to the specified user """
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        # Update the specific flower column for the user
+        cursor.execute(f'UPDATE users SET flower{flower_number} = ? user_id = ?', (flower_id, user_id,))
+
+        conn.commit()
+        conn.close()
