@@ -9,64 +9,87 @@ WindowManager:
     name: "login"
     entry: entry  # Bind the ObjectProperty to the TextInput
 
-    GridLayout:
-        cols: 1
-
+    FloatLayout
         Label:
             text: "Input your user id"
-        
+            font_size: '40sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
         TextInput:
             id: entry
             multiline: False
+            size_hint: (0.5, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
-        GridLayout:
-            cols: 1
-
-            Button:
-                text: "Submit"
-                on_press:
-                    root.save_btn_press()
-                    app.root.current = "main"
-                    root.manager.transition.direction = "right"
+        Button:
+            text: "Submit"
+            font_size: '30sp'
+            size_hint: (0.3, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            on_press:
+                root.save_btn_press()
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
                     
-
-
 
 
 <MainWindow>:
     name: "main"
     
     FloatLayout:
-       
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
+
         Label:
             text: "name of app goes here"
-            font_size: '30sp'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            font_size: '100sp'
+            font_name: 'HGS'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
 
         Button:
             text: "New Entry"
-            size_hint: (0.3, 0.2)
-            pos_hint: {'center_x': 0.2, 'center_y': 0.3}
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.2, 'center_y': 0.1}
             on_release:
                 app.root.current = "journal"
                 root.manager.transition.direction = "left"
         
         Button:
             text: "New Gratitude"
-            size_hint: (0.3, 0.2)
-            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_release:
                 app.root.current = "gratitude"
                 root.manager.transition.direction = "left"
 
         Button:
             text: "See Previous Entries"
-            size_hint: (0.3, 0.2)
-            pos_hint: {'center_x': 0.8, 'center_y': 0.3}
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.8, 'center_y': 0.1}
             on_release:
                 app.root.current = "history"
                 root.manager.transition.direction = "left"
+        
+        Image:
+            source: 'Pot.png'  
+            size_hint: None, None
+            size: 300, 200  
+            pos_hint: {'center_x': 0.2, 'center_y': 0.3}
 
+        Image:
+            source: 'Pot.png'  
+            size_hint: None, None
+            size: 300, 200  
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3} 
+
+        Image:
+            source: 'Pot.png'  
+            size_hint: None, None
+            size: 300, 200  
+            pos_hint: {'center_x': 0.8, 'center_y': 0.3}  
 
 <JournalWindow>:
     name: "journal"

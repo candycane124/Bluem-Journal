@@ -3,6 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
 from backend import Backend
+from kivy.core.window import Window
 
 class MainWindow(Screen):
     pass
@@ -49,6 +50,7 @@ class MyApp(App):
         self.backend = Backend()
         entry = ObjectProperty(None)
         entries = ObjectProperty(None)
+        Window.size = (650, 400)
         return kv
 
 if __name__ == "__main__":
