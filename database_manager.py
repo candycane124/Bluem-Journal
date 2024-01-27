@@ -22,3 +22,11 @@ class DatabaseManager:
         conn.execute('INSERT INTO entries (text_entry) VALUES (?);', (text,))
         conn.commit()
         conn.close()
+
+    def get_last_text_entry(self):
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+        cursor.execute("SELECT text_entry FROM entries ORDER BY id DESC LIMIT 1")
+        last_entry = cursor.fetchone()
+        conn.close()
+        return last_entry[0] if last_entry else "No entries found"
