@@ -27,11 +27,7 @@ WindowManager:
                 on_press:
                     root.save_btn_press()
                     app.root.current = "main"
-                    root.manager.transition.direction = "right"
-                    
-
-
-
+                    root.manager.transition.direction = "up"
 
 <MainWindow>:
     name: "main"
@@ -72,6 +68,7 @@ WindowManager:
     name: "journal"
 
     entry: entry
+    prompt: prompt
 
     GridLayout:
         cols: 1
@@ -81,7 +78,26 @@ WindowManager:
         
         TextInput:
             id: entry
-            multiline: False
+            hint_text: "start writing..."
+            multiline: True
+        
+        Label:
+            text: "Don't know what to write about?"
+
+        GridLayout:
+            cols: 2
+
+            Button:
+                text: "Generate new prompt"
+                on_press:
+                    root.new_prompt()
+
+            Label:
+                id: prompt
+                text: ""
+                text_size: self.size
+                valign: "middle"
+                halign: "center"
 
         GridLayout:
             cols: 2
@@ -95,22 +111,57 @@ WindowManager:
             Button:
                 text: "Submit"
                 on_press: root.save_btn_press()
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
 
 <HistoryWindow>:
     name: "history"
     entries: entries
+    orientation: "vertical"
 
     GridLayout:
         cols: 1
         # size: root.width, root.height
 
         Button:
-            text: "show most recent entry"
-            on_press: root.show_btn_press()
+            text: "Update/View Entries"
+            on_press:
+                root.addLabels()
+                # root.show_btn_press()
 
-        Label:
-            id: entries
-            text: ""
+        MDScrollView:
+            MDList:
+                id: entries
+
+        # ScrollView:
+        #     size_hint: 1, 0.6
+        #     GridLayout:
+        #         id: entries
+        #         size_hint: 1, 1
+        #         height: self.minimum_height
+        #         cols: 1
+        #         rows: 5
+        #         Label:
+        #             text: 'Filler'
+        #         Label:
+        #             text: 'Filler'
+        #         Label:
+        #             text: 'Filler'
+        #         Label:
+        #             text: 'Filler'
+        #         Label:
+        #             text: 'Filler'
+        #         Label:
+        #             text: 'Filler'
+        #         Label:
+        #             text: 'Filler'
+        #         Label:
+        #             text: 'Filler'
+
+        # Label:
+        #     id: entries
+        #     text: ""
         
         Button:
             text: "Back"

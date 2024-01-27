@@ -76,6 +76,16 @@ class DatabaseManager:
 
         conn.close()
         return entries
+
+    def get_all_entries(self, user_id):
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT * FROM journal_entries WHERE user_id = ? ORDER BY entry_date DESC", (user_id,))
+        entries = cursor.fetchall()
+
+        conn.close()
+        return entries
     
     def get_points(self, user_id):
         conn = sqlite3.connect(self.db_name)
