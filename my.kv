@@ -28,14 +28,14 @@ WindowManager:
             multiline: False
             font_name: 'HGS'
             font_size: '30sp'
-            size_hint: (0.5, 0.1)
+            size_hint: (0.3, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
         Button:
             text: "Submit"
             font_name: 'HGS'
             font_size: '30sp'
-            size_hint: (0.3, 0.1)
+            size_hint: (0.2, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.3}
             on_press:
                 root.save_btn_press()
@@ -63,9 +63,9 @@ WindowManager:
 
         Button:
             text: "New Entry"
-            font_size: '30sp'
             font_name: 'HGS'
-            size_hint: (0.25, 0.1)
+            font_size: '20sp'
+            size_hint: (0.2, 0.1)
             pos_hint: {'center_x': 0.2, 'center_y': 0.1}
             on_release:
                 app.root.current = "journal"
@@ -73,19 +73,19 @@ WindowManager:
         
         Button:
             text: "New Gratitude"
-            font_size: '30sp'
             font_name: 'HGS'
-            size_hint: (0.25, 0.1)
+            font_size: '20sp'
+            size_hint: (0.2, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_release:
                 app.root.current = "gratitude"
                 root.manager.transition.direction = "left"
 
         Button:
-            text: "Previous Entries"
-            font_size: '30sp'
+            text: "See Previous Entries"
             font_name: 'HGS'
-            size_hint: (0.25, 0.1)
+            font_size: '20sp'
+            size_hint: (0.2, 0.1)
             pos_hint: {'center_x': 0.8, 'center_y': 0.1}
             on_release:
                 app.root.current = "history"
@@ -114,31 +114,48 @@ WindowManager:
 
 <JournalWindow>:
     name: "journal"
-
     entry: entry
 
-    GridLayout:
-        cols: 1
+    FloatLayout
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
 
         Label:
             text: "How are you feeling?"
+            color: 0.3, 0.6, 0.6, 1
+            font_name: 'HGS'
+            font_size: '40sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
         
         TextInput:
             id: entry
-            multiline: False
+            multiline: True
+            font_name: 'HGS'
+            font_size: '30sp'
+            size_hint: (0.5, 0.3)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
-        GridLayout:
-            cols: 2
+        Button:
+            text: "Back"
+            font_name: 'HGS'
+            font_size: '30sp'
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.3, 'center_y': 0.2}
+            on_press:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
 
-            Button:
-                text: "Back"
-                on_release:
-                    app.root.current = "main"
-                    root.manager.transition.direction = "right"
-            
-            Button:
-                text: "Submit"
-                on_press: root.save_btn_press()
+        Button:
+            text: "Submit"
+            font_name: 'HGS'
+            font_size: '30sp'
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.7, 'center_y': 0.2}
+            on_press:
+                root.save_btn_press()
 
 <HistoryWindow>:
     name: "history"
