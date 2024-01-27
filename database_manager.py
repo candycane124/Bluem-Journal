@@ -16,13 +16,13 @@ class DatabaseManager:
                 user_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL,
                 password_hash TEXT NOT NULL,
-                points INTEGER DEFAULT 0
+                points INTEGER DEFAULT 0,
                 streak INTEGER DEFAULT 0
             );
         ''')
 
         cursor.execute('''
-            CREATE TABLE journal_entries (
+            CREATE TABLE IF NOT EXISTS journal_entries (
                 entry_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER,
                 entry_text TEXT NOT NULL,
@@ -67,7 +67,7 @@ class DatabaseManager:
         conn.close()
         return last_entry[0] if last_entry else "No entries found"
     
-    def get_last_5_entries(self, user_id):
+    def get_last_five_entries(self, user_id):
         conn = sqlite3.connect(self.db_name)
         cursor = conn.cursor()
         

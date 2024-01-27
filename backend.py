@@ -9,7 +9,8 @@ class Backend:
     def record_entry(self, user_id, entry_text):
         entry_date = datetime.now()
         self.db_manager.record_entry(user_id, entry_text, entry_date)
-        self.db_manager.add_points(user_id)
+        points_to_add = 1 # random will need to change
+        self.db_manager.add_points(user_id, points_to_add)
     
     def get_last_entry(self):
         return self.db_manager.get_last_text_entry()
