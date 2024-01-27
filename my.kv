@@ -91,23 +91,26 @@ WindowManager:
                 app.root.current = "history"
                 root.manager.transition.direction = "left"
         
-        Image:
-            source: 'Pot.png'  
+        Button:
             size_hint: None, None
-            size: 300, 200  
+            size: '150dp', '150dp'
             pos_hint: {'center_x': 0.2, 'center_y': 0.3}
+            background_normal: 'Pot.png'   
+            on_press: root.flower_pot_press()
 
-        Image:
-            source: 'Pot.png'  
+        Button:
             size_hint: None, None
-            size: 300, 200  
-            pos_hint: {'center_x': 0.5, 'center_y': 0.3} 
-
-        Image:
-            source: 'Pot.png'  
+            size: '150dp', '150dp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            background_normal: 'Pot.png'   
+            on_press: root.flower_pot_press()
+        
+        Button:
             size_hint: None, None
-            size: 300, 200  
-            pos_hint: {'center_x': 0.8, 'center_y': 0.3}  
+            size: '150dp', '150dp'
+            pos_hint: {'center_x': 0.8, 'center_y': 0.3}
+            background_normal: 'Pot.png'   
+            on_press: root.flower_pot_press()
 
 <JournalWindow>:
     name: "journal"
