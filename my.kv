@@ -1,7 +1,36 @@
 WindowManager:
+    Login:
     MainWindow:
     JournalWindow:
     HistoryWindow:
+
+<Login>:
+    name: "login"
+    entry: entry  # Bind the ObjectProperty to the TextInput
+
+    GridLayout:
+        cols: 1
+
+        Label:
+            text: "Input your user id"
+        
+        TextInput:
+            id: entry
+            multiline: False
+
+        GridLayout:
+            cols: 1
+
+            Button:
+                text: "Submit"
+                on_press:
+                    root.save_btn_press()
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+                    
+
+
+
 
 <MainWindow>:
     name: "main"

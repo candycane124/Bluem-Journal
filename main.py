@@ -7,18 +7,26 @@ from backend import Backend
 class MainWindow(Screen):
     pass
 
+class Login(Screen):
+    def save_btn_press(self):
+        backend = App.get_running_app().backend
+        user_id = self.entry.text
+        backend.login(user_id)
+        print(user_id)
+        self.entry.text = ""
+
 class JournalWindow(Screen):
     def save_btn_press(self):
-        self.backend = Backend()
+        backend = App.get_running_app().backend
         entered_text = self.entry.text
-        self.backend.record_entry(123, entered_text) # fix user id
+        backend.record_entry(entered_text) # fix user id
         print(entered_text)
         self.entry.text = ""
 
 class HistoryWindow(Screen):    
     def show_btn_press(self):
-        self.backend = Backend()
-        entries = self.backend.get_last_five_entries(123) # fix user id
+        backend = App.get_running_app().backend
+        entries = backend.get_last_five_entries() # fix user id
         print(entries)
         finalStr = "" 
         for entry in entries:
@@ -32,6 +40,8 @@ class WindowManager(ScreenManager):
 kv = Builder.load_file("my.kv")
 
 class MyApp(App):
+    backend = None
+
     def build(self):
         self.backend = Backend()
         entry = ObjectProperty(None)
