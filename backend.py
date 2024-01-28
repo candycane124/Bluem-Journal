@@ -2,6 +2,7 @@
 from database_manager import DatabaseManager
 from datetime import datetime
 import random
+from openai import OpenAI
 
 class Backend:
     def __init__(self):
@@ -42,3 +43,26 @@ class Backend:
             self.db_manager.subtract_points(self.user_id, self.flower_price)
             flower_id = random.randint(1, 9)
             self.db_manager.add_flower(self.user_id, flower_number, flower_id)
+
+    def query_chatgpt(self, current_journal_entry):
+        client = OpenAI(
+            # This is the default and can be omitted
+            api_key='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',
+        )
+
+        try:
+            chat_prompt = f"I have written a journal entry and I'm seeking a deeper reflection. Here is the entry: '{current_journal_entry}' Based on this, what is one impactful question you can ask to help me reflect further and think more deeply?"
+            chat_completion = client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": chat_prompt,
+                    }
+                ],
+            model="gpt-3.5-turbo",
+            )
+            
+            return chat_completion.choices[0].message.content
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return "How did that make you feel?"
