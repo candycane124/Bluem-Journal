@@ -25,7 +25,8 @@ class MainWindow(Screen):
 
     def auto_update(self, dt):
         backend = App.get_running_app().backend
-        point = backend.get_points()  # this is not working, it gets the value None
+        point = backend.get_points()
+        print(point)
         self.point_txt = f"Points: {point}"
     
     def on_enter(self):
