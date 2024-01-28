@@ -41,8 +41,7 @@ class JournalWindow(Screen):
     def save_btn_press(self):
         backend = App.get_running_app().backend
         entered_text = self.entry.text
-        backend.record_entry(entered_text) # fix user id
-        backend.add_points(1)   
+        backend.record_entry(entered_text) # fix user id  
         print(entered_text)
         self.entry.text = ""
 
