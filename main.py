@@ -32,7 +32,6 @@ class MainWindow(Screen):
         if f1 != 0:
             image_widget = self.ids.flower1
             image_widget.source = f'flowers/f{f1}.png'
-            print("Image Source:", image_widget.source)
 
         f2 = backend.get_flower(2)
         if f2 != 0:
@@ -43,7 +42,7 @@ class MainWindow(Screen):
         if f3 != 0:
             image_widget = self.ids.flower3
             image_widget.source = f'flowers/f{f3}.png'
-    
+
     def on_enter(self):
         self.auto_update(0)  # Pass dt=0 to simulate an immediate update
 
