@@ -2,7 +2,7 @@ WindowManager:
     MainWindow:
     JournalWindow:
     HistoryWindow:
-    GratitudeJarApp:
+    NegativityPebbleApp:
 
 <MainWindow>:
     name: "main"
@@ -23,11 +23,11 @@ WindowManager:
                 root.manager.transition.direction = "left"
         
         Button:
-            text: "New Gratitude"
+            text: "Track Mood"
             size_hint: (0.3, 0.2)
             pos_hint: {'center_x': 0.5, 'center_y': 0.3}
             on_release:
-                app.root.current = "gratitude"
+                app.root.current = "negativitypebble"
                 root.manager.transition.direction = "left"
 
         Button:
@@ -90,39 +90,68 @@ WindowManager:
                 root.manager.transition.direction = "right"
 
 
-
-<GratitudeJarApp>:
-    name: 'gratitude'
-
-    BoxLayout:
-        orientation: 'vertical'
-        padding: 10
-        spacing: 10
-        size_hint_y: None
-        height: 500
-
+<NegativityPebbleApp>:
+    name: "negativitypebble"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'pond.webp'
+    FloatLayout:
         Image:
-            source: 'garden background.png'
-            size: 1000, 800
-            size_hint: None, None
+            source: 'pond.webp'
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 1,1
+        
+        Label:
+            id: heading
+            text: 'Negativity Pebble'
+            font_size: 150
+            font_name: 'titlefont.ttf'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            color: 0.4, 0.2, 0.1, 1
+        
+            # canvas.before:
+            #     Color:
+            #         rgba: 1,1,1,0.5
+            #     Rectangle:
+            #         pos: 250, 550
+            #         size: self.width*0.5, self.height*0.1
+        Image:
+            id: pebble
+            source: 'pebble.png'
+            size_hint: 0.35, 0.5
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            opacity: 1 
             allow_stretch: True
             keep_ratio: False
 
-        Label:
-            text: 'What are you grateful for today?'
-            font_size: 20
-
         TextInput:
-            hint_text: 'Enter your gratitude...'
+            id: negative_message
+            hint_text: "Write down a negative thought"
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.5, 'center_y':.5}
             multiline: False
-            font_size: 14
+            font_size: 15
+            font_name: 'contentfont.ttf'
+    
+        Button:
+            id: throw_button
+            text: 'throw!'
+            on_press: root.throw_action()#root.animate_it(self)
+            # on_press: root.animate_it(pebble)
+            #on_release: root.animate_it(self)
+            size_hint: 0.2, 0.1
+            pos: 400, 80
+            color: 1, 1, 0.8, 1
+            background_color: 1, 0.5, 0.259,1
 
         Button:
-            text: 'Add Gratitude'
-            # on_press: root.add_gratitude(self)
-            font_size: 14
-            background_color: 0, 1, 0, 1
+            text: "Back"
+            pos_hint: {'center_x':0.95, 'center_y':0.95}
+            size_hint: 0.1, 0.1
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
 
-        Label:
-            # text: root.gratitude_display.text
-            font_size: 14
