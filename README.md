@@ -22,6 +22,9 @@ Serenity Journal is an innovative journaling application developed for the Seren
 ### Journaling Assistance
 - **Integration with ChatGPT API**: The app uses ChatGPT to generate insightful questions, encouraging users to delve deeper into their thoughts and emotions.
 
+![image](https://github.com/JasonQuantrill/Journal/assets/91751222/4840cef9-3717-419b-917f-191893c7fac4)
+
+
 ### Negative Thoughts Pebble
 - **Release Negative Thoughts**: Users can write down negative thoughts and watch as the app performs an animation to symbolically throw these thoughts into a pond, aiding in emotional release.
 
