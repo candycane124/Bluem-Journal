@@ -218,7 +218,7 @@ class MyApp(MDApp):
 
     def build(self):
         self.backend = Backend()
-        self.title = "name goes here"
+        self.title = "Bluem"
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Pink"
         Window.size = (650, 400)
