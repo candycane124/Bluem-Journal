@@ -33,9 +33,9 @@ class JournalWindow(Screen):
 
     def ask_btn_press(self):
         backend = App.get_running_app().backend
-        entered_text = self.entry.text
-        #question_prompt = backend.question_prompt(entered_text)
-        question_prompt = "New Question?"
+        current_journal_entry = self.entry.text
+        question_prompt = backend.query_chatgpt(current_journal_entry)
+        #question_prompt = "New Question?"
         self.feeling_label_text = question_prompt
 
 class HistoryWindow(Screen):    
