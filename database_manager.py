@@ -13,7 +13,7 @@ class DatabaseManager:
         ### To reset users table in db
         # cursor.execute('''
         #     DROP TABLE IF EXISTS users
-        #     ''')
+        #      ''')
 
         # Create the 'users' table
         cursor.execute('''
@@ -180,7 +180,7 @@ class DatabaseManager:
             # Check if the flowers table is empty
             if self.check_table_empty_flowers(conn):
                 # Insert flower images
-                for i in range(1, 10):
+                for i in range(1, 6):
                     image_path = f"flowers/f{i}.png"
                     conn.execute('INSERT INTO flowers (image_path) VALUES (?)', (image_path,))
 

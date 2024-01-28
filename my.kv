@@ -124,8 +124,8 @@ WindowManager:
         Button:
             btn_id: 1
             size_hint: None, None
-            size: '150dp', '150dp'
-            pos_hint: {'center_x': 0.2, 'center_y': 0.35}
+            size: '120dp', '120dp'
+            pos_hint: {'center_x': 0.2, 'center_y': 0.34}
             background_normal: 'Pot.png'   
             on_press: root.flower_pot_press(self)
 
@@ -134,13 +134,14 @@ WindowManager:
             source: 'placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
-            pos_hint: {'center_x': 0.46, 'center_y': 0.425}
+            pos_hint: {'center_x': 0.44, 'center_y': 0.44}
+            pos: 100, 100
 
         Button:
             btn_id: 2
             size_hint: None, None
-            size: '150dp', '150dp'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            size: '120dp', '120dp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.34}
             background_normal: 'Pot.png'   
             on_press: root.flower_pot_press(self)
         
@@ -149,21 +150,22 @@ WindowManager:
             source: 'placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
-            pos_hint: {'center_x': 0.76, 'center_y': 0.425}
+            pos_hint: {'center_x': 0.74, 'center_y': 0.44}
         
         Button:
             btn_id: 3
             size_hint: None, None
-            size: '150dp', '150dp'
-            pos_hint: {'center_x': 0.8, 'center_y': 0.35}
+            size: '120dp', '120dp'
+            pos_hint: {'center_x': 0.8, 'center_y': 0.34}
             background_normal: 'Pot.png'   
-            on_press: root.flower_pot_press()
+            on_press: root.flower_pot_press(self)
+        
         Image:
             id: flower3
             source: 'placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
-            pos_hint: {'center_x': 1.06, 'center_y': 0.425}
+            pos_hint: {'center_x': 1.04, 'center_y': 0.44}
 
         Button:
             text: "logout"
@@ -175,6 +177,7 @@ WindowManager:
             on_release:
                 app.root.current = "login"
                 root.manager.transition.direction = "right"
+            
 <JournalWindow>:
     name: "journal"
     entry: entry
@@ -375,6 +378,7 @@ WindowManager:
             text: 'throw!'
             font_name: 'contentfont3.ttf'
             on_press: root.throw_action()
+            on_release: root.add_points()
             size_hint: 0.2, 0.1
             pos_hint: {'center_x':.5, 'center_y':.2}
             # pos: 400, 80

@@ -8,11 +8,14 @@ class Backend:
     def __init__(self):
         self.db_manager = DatabaseManager('app_data.db')
         self.user_id = None
-        self.entry_points_to_add = 1
-        self.flower_price = 1
+        self.entry_points_to_add = 2
+        self.flower_price = 5
 
     def login(self, username):
         self.user_id = self.db_manager.login_or_create_user(username)
+
+    def add_points(self, points_to_add):
+        self.db_manager.add_points(self.user_id, points_to_add)
 
     def record_entry(self, entry_text):
         entry_date = datetime.now()
@@ -45,8 +48,11 @@ class Backend:
         if points >= self.flower_price:
             print("here")
             self.db_manager.subtract_points(self.user_id, self.flower_price)
-            flower_id = random.randint(1, 9)
+            flower_id = random.randint(1, 5)
             self.db_manager.add_flower(self.user_id, pot_number, flower_id)
+            return True
+        else:
+            return False
 
     def get_flower(self, pot_number):
         return self.db_manager.get_flower_id(self.user_id, pot_number)
@@ -54,7 +60,7 @@ class Backend:
     def query_chatgpt(self, current_journal_entry):
         client = OpenAI(
             # This is the default and can be omitted
-            api_key='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',
+            api_key='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',
         )
 
         try:

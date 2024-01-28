@@ -29,22 +29,47 @@ class MainWindow(Screen):
         self.point_txt = f"Points: {point}"
 
         f1 = backend.get_flower(1)
+        if f1 != 0:
+            image_widget = self.ids.flower1
+            image_widget.source = f'flowers/f{f1}.png'
+
         f2 = backend.get_flower(2)
+        if f2 != 0:
+            image_widget = self.ids.flower2
+            image_widget.source = f'flowers/f{f2}.png'
+
         f3 = backend.get_flower(3)
-        print(f"1: {f1}\n2: {f2}\n3: {f3}")
-    
+        if f3 != 0:
+            image_widget = self.ids.flower3
+            image_widget.source = f'flowers/f{f3}.png'
+
     def on_enter(self):
         self.auto_update(0)  # Pass dt=0 to simulate an immediate update
 
         Clock.schedule_interval(self.auto_update, 1)
 
-    
+    def buy_flower(self, pot_number):
+        backend = App.get_running_app().backend
+        buy_success = backend.buy_flower(pot_number)
+        if not buy_success:
+            dialog = MDDialog(
+                title="Not enough points",
+                text="Sorry, but you don't have enough points to buy a new seed. Keep journaling to earn more points!",
+                buttons=[
+                    MDFlatButton(
+                        text="Okay",
+                        on_release=lambda x: dialog.dismiss()
+                    ),
+                ],
+            )
+            dialog.open()
+
     def flower_pot_press(self, button):
         backend = App.get_running_app().backend
         print(button.btn_id)
         dialog = MDDialog(
             title="Plant Seed",
-            text="Would you like to buy a new random new flower for 10 points?",
+            text="Would you like to buy a new random new flower for 5 points?",
             buttons=[
                 MDFlatButton(
                     text="NO",
@@ -52,7 +77,8 @@ class MainWindow(Screen):
                 ),
                 MDFlatButton(
                     text="YES",
-                    on_release=lambda x: backend.buy_flower(button.btn_id)
+                    on_press=lambda x: self.buy_flower(button.btn_id),
+                    on_release=lambda x: dialog.dismiss()
                 ),
             ],
         )
@@ -72,7 +98,7 @@ class JournalWindow(Screen):
     def save_btn_press(self):
         backend = App.get_running_app().backend
         entered_text = self.entry.text
-        backend.record_entry(entered_text) # fix user id  
+        backend.record_entry(entered_text)
         print(entered_text)
         self.entry.text = ""
 
@@ -121,18 +147,6 @@ class HistoryWindow(Screen):
         self.entries.remove_widget(item)
 
 
-# class PebbleImage(Image):
-#     def animate_it(self, *args):
-#         animate = Animation(
-#             size_hint=(0.5,0.7),
-#             duration=0.2
-#         )
-#         animate += Animation(
-#             size_hint=(0,0), 
-#             duration=0.8
-#         )
-#         animate.start(self)
-    
 class NegativityPebbleApp(Screen):
     def reset_page(self):
         self.ids.negative_message.text=""
@@ -150,6 +164,10 @@ class NegativityPebbleApp(Screen):
 
     def on_enter(self, *args):
         self.reset_page()
+
+    def add_points(self):
+        backend = App.get_running_app().backend
+        backend.add_points(1)
 
     def throw_action(self):
         try:
@@ -202,7 +220,7 @@ class MyApp(MDApp):
 
     def build(self):
         self.backend = Backend()
-        self.title = "name goes here"
+        self.title = "Bluem"
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Pink"
         Window.size = (650, 400)
