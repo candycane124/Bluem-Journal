@@ -147,6 +147,7 @@ class NegativityPebbleApp(Screen):
         self.ids.pebble.size_hint=(0.35,0.5)
         self.ids.pebble.pos_hint={'center_x': 0.5, 'center_y': 0.5} 
         self.ids.pebble.opacity=1
+
     def on_enter(self, *args):
         self.reset_page()
 
@@ -160,6 +161,9 @@ class NegativityPebbleApp(Screen):
             self.ids.negative_message.disabled=True
             self.ids.throw_button.opacity=0
             self.ids.throw_button.disabled=True
+            self.ids.pebble.opacity=0
+            self.ids.pebble.disabled=True
+            self.ids.chew.opacity=1
             animate = Animation(
                 size_hint=(0.45,0.65),
                 duration=0.5
@@ -168,13 +172,12 @@ class NegativityPebbleApp(Screen):
                 size_hint=(0.15,0.23),
                 duration=0.25
             )
-            
             animate += Animation(
                 size_hint=(0,0),
                 pos_hint={'center_y':0.35},
                 duration=0.34
             )
-            animate.start(self.ids.pebble)
+            animate.start(self.ids.chew)
             fade = Animation(
                 opacity=1,
                 duration=2.5 

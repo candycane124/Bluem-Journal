@@ -39,6 +39,7 @@ WindowManager:
             text: "Submit"
             font_name: 'contentfont3'
             font_size: '30sp'
+            color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             size_hint: (0.2, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
@@ -88,6 +89,8 @@ WindowManager:
             text: "New Entry"
             font_name: 'contentfont3'
             font_size: '15sp'
+            color: 1, 1, 0.8, 1
+            background_color: 1, 0.5, 0.259,1
             size_hint: (0.2, 0.1)
             pos_hint: {'center_x': 0.2, 'center_y': 0.1}
             on_release:
@@ -98,6 +101,8 @@ WindowManager:
             text: "Negativity Pebble"
             font_name: 'contentfont3'
             font_size: '15sp'
+            color: 1, 1, 0.8, 1
+            background_color: 1, 0.5, 0.259,1
             size_hint: (0.22, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_release:
@@ -108,6 +113,8 @@ WindowManager:
             text: "Previous Entries"
             font_name: 'contentfont3'
             font_size: '15sp'
+            color: 1, 1, 0.8, 1
+            background_color: 1, 0.5, 0.259,1
             size_hint: (0.22, 0.1)
             pos_hint: {'center_x': 0.8, 'center_y': 0.1}
             on_release:
@@ -174,7 +181,7 @@ WindowManager:
 
     FloatLayout:
         Image:
-            source: 'garden background.png' 
+            source: 'notebook.png' 
             size: self.size
             pos: self.pos
             allow_stretch: True
@@ -182,24 +189,26 @@ WindowManager:
 
         Label:
             text: root.feeling_label_text
-            size_hint: 0.8, None
+            size_hint: (0.2, 0.5)
             text_size: self.width, None
             halign: 'center'
             valign: 'middle'
             multiline: True
-            color: 0.3, 0.6, 0.6, 1
-            font_name: 'font'
-            font_size: '40sp'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            color: 0.4, 0.2, 0.1, 1
+            font_name: 'contentfont3'
+            font_size: '20sp'
+            pos_hint: {'center_x': 0.33, 'center_y': 0.55}
         
         TextInput:
             id: entry
             hint_text: "start writing..."
+            text_color: 0.4, 0.2, 0.1, 1
             multiline: True
-            font_name: 'font'
-            font_size: '30sp'
-            size_hint: (0.5, 0.3)
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            font_name: 'contentfont3'
+            font_size: '15sp'
+            size_hint: (0.2, 0.5)
+            pos_hint: {'center_x': 0.65, 'center_y': 0.5}
+            background_color: 0,0,0,0
         
         # Label:
         #     text: "Don't know what to write about?"
@@ -224,8 +233,10 @@ WindowManager:
 
         Button:
             text: "Back"
-            font_name: 'font'
-            font_size: '30sp'
+            font_name: 'contentfont3'
+            font_size: '20sp'
+            color: 1, 1, 0.8, 1
+            background_color: 1, 0.5, 0.259,1
             size_hint: (0.125, 0.1)
             pos_hint: {'center_x': 0.35, 'center_y': 0.2}
             on_press:
@@ -234,8 +245,11 @@ WindowManager:
 
         Button:
             text: "Ask"
-            font_name: 'font'
-            font_size: '30sp'
+            
+            font_name: 'contentfont3'
+            font_size: '20sp'
+            color: 1, 1, 0.8, 1
+            background_color: 1, 0.5, 0.259,1
             size_hint: (0.125, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.2}
             on_press:
@@ -243,8 +257,10 @@ WindowManager:
 
         Button:
             text: "Finish"
-            font_name: 'font'
-            font_size: '30sp'
+            font_name: 'contentfont3'
+            font_size: '20sp'
+            color: 1, 1, 0.8, 1
+            background_color: 1, 0.5, 0.259,1
             size_hint: (0.125, 0.1)
             pos_hint: {'center_x': 0.65, 'center_y': 0.2}
             on_press:
@@ -329,21 +345,30 @@ WindowManager:
 
         Image:
             id: pebble
-            source: 'pebble.png'
+            source: 'chomp.png'
             size_hint: 0.3, 0.5
             pos_hint: {'center_x':.5, 'center_y':.5}
             opacity: 1 
+            allow_stretch: True
+            keep_ratio: False
+        Image:
+            id: chew
+            source: 'chew.png'
+            size_hint: 0.3, 0.5
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            opacity: 0 
             allow_stretch: True
             keep_ratio: False
 
         TextInput:
             id: negative_message
             hint_text: "Write down a negative thought"
-            size_hint: 0.3, 0.1
-            pos_hint: {'center_x':.5, 'center_y':.5}
+            size_hint: 0.2, 0.1
+            pos_hint: {'center_x':.5, 'center_y':.46}
             multiline: False
             font_size: 15
             font_name: 'contentfont3.ttf'
+            background_color: 0,0,0,0
     
         Button:
             id: throw_button
