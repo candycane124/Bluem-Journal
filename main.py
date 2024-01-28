@@ -112,51 +112,57 @@ class HistoryWindow(Screen):
 #         animate.start(self)
     
 class NegativityPebbleApp(Screen):
-    # class PebbleImage(Image):
-    # def animate_it(self, *args):
-    #         animate = Animation(
-    #             size_hint=(0.5,0.7),
-    #             duration=0.2
-    #         )
-    #         animate += Animation(
-    #             size_hint=(0,0),
-    #             duration=0.8
-    #         )
-    #         animate.start(self)
-
-    # def animate_it(self, *args):
-    #     self.ids.pebble.animate_it()
-        # animate = Animation(
-        #     size_hint=(0.5,0.7),
-        #     duration=0.2
-        # )
-        # animate += Animation(
-        #     size_hint=(0,0),
-        #     duration=0.8
-        # )
-        # animate.start(self)
+    def reset_page(self):
+        self.ids.negative_message.text=""
+        self.ids.negative_message.opacity=1
+        self.ids.negative_message.disabled=False
+        self.ids.heading.opacity=1
+        self.ids.heading.disabled=False
+        self.ids.throw_button.opacity=1
+        self.ids.throw_button.disabled=False
+        self.ids.message.opacity=0
+        #reset pebble
+        self.ids.pebble.size_hint=(0.35,0.5)
+        self.ids.pebble.pos_hint={'center_x': 0.5, 'center_y': 0.5} 
+        self.ids.pebble.opacity=1
+    def on_enter(self, *args):
+        self.reset_page()
 
     def throw_action(self):
         try:
             negative_thought = self.ids.negative_message.text
             print(negative_thought)
-            # self.ids.throww.text = (negative_thought)
             self.ids.heading.opacity=0
             self.ids.heading.disabled=True
             self.ids.negative_message.opacity=0
             self.ids.negative_message.disabled=True
             self.ids.throw_button.opacity=0
             self.ids.throw_button.disabled=True
-            # self.ids.pebble.animate_it()
             animate = Animation(
-                size_hint=(0.5,0.7),
-                duration=0.2
+                size_hint=(0.45,0.65),
+                duration=0.5
             )
             animate += Animation(
-                size_hint=(0,0),
-                duration=0.8
+                size_hint=(0.15,0.23),
+                duration=0.25
             )
-            animate.start(pebble)
+            
+            animate += Animation(
+                size_hint=(0,0),
+                pos_hint={'center_y':0.35},
+                duration=0.34
+            )
+            animate.start(self.ids.pebble)
+            fade = Animation(
+                opacity=1,
+                duration=2.5 
+            )
+            fade.start(self.ids.message)
+            # fade = Animation(
+            #     opacity=1,
+            #     duration=2
+            # )
+            # fade.start(self.ids.message)
         except Exception as e:
            print(f"An error occured: {e}")
            import traceback
