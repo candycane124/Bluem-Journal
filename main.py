@@ -10,6 +10,15 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 
 class MainWindow(Screen):
+    point_txt = "Points: 0"
+    
+    def auto_update(self):
+        backend = App.get_running_app().backend
+        point = backend.get_points()
+        self.point_txt = "Points: " + str(point)
+
+    # Clock.schedule_interval(auto_update, 1)   automatically check the point and update every 1 sec
+        
     def flower_pot_press(self):
         backend = App.get_running_app().backend
         backend.buy_flower(1) #fix user id
