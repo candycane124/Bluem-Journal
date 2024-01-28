@@ -15,6 +15,7 @@ WindowManager:
             size: self.size
             pos: self.pos
             allow_stretch: True
+            keep_ratio: False
 
         Label:
             text: "Input your user id"
@@ -53,6 +54,7 @@ WindowManager:
             size: self.size
             pos: self.pos
             allow_stretch: True
+            keep_ratio: False
 
         Label:
             text: "name of app goes here"
@@ -129,6 +131,7 @@ WindowManager:
             size: self.size
             pos: self.pos
             allow_stretch: True
+            keep_ratio: False
 
         Label:
             text: root.feeling_label_text
@@ -206,24 +209,38 @@ WindowManager:
 <HistoryWindow>:
     name: "history"
     entries: entries
-    orientation: "vertical"
 
-    GridLayout:
-        cols: 1
-
+    FloatLayout:
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
+            keep_ratio: False
+    
         Button:
             text: "Display/Update Entries"
+            font_name: 'font'
+            font_size: '25sp'
+            size_hint: (0.5, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.85}
             on_press:
                 root.addLabels()
                 # root.show_btn_press()
 
         MDScrollView:
+            size_hint: (0.5, 0.5)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
             MDList:
                 id: entries
 
         Button:
             text: "Back"
             font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
@@ -241,6 +258,7 @@ WindowManager:
             size: self.size
             pos: self.pos
             allow_stretch: True
+            keep_ratio: False
 
         Label:
             text: 'What are you grateful for today?'

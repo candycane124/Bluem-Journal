@@ -62,6 +62,8 @@ class HistoryWindow(Screen):
             item = OneLineListItem(text=entry[2])
             setattr(item, 'entry_id', entry[0])
             item.bind(on_press=lambda x, item=item: self.confirm_delete(item))
+            item.theme_text_color = "Custom"
+            item.text_color: (0.3, 0.6, 0.6, 1)  
             self.entries.add_widget(item)
 
     def confirm_delete(self, item):
