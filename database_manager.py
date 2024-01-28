@@ -10,12 +10,16 @@ class DatabaseManager:
         conn = sqlite3.connect(self.db_name)
         cursor = conn.cursor()
 
+        ### To reset users table in db
+        #cursor.execute('''
+        #    DROP TABLE IF EXISTS users
+        #    ''')
+
         # Create the 'users' table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS users (
                 user_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL,
-                password_hash TEXT NOT NULL,
                 points INTEGER DEFAULT 0,
                 streak INTEGER DEFAULT 0,
                 flower1 INTEGER DEFAULT 0,
@@ -119,14 +123,52 @@ class DatabaseManager:
         result = cursor.fetchone()
 
         conn.close()
-        return result
+        return result[0]
     
     def add_points(self, user_id, points_to_add):
         conn = sqlite3.connect(self.db_name)
-        conn.execute("UPDATE users SET points = points + ? WHERE user_id = ?", (points_to_add, user_id))
+        cursor = conn.cursor()
+
+        cursor.execute("UPDATE users SET points = points + ? WHERE user_id = ?", (points_to_add, user_id))
+        
+        cursor.execute("SELECT points FROM users WHERE user_id = ?", (user_id,))
+        current_points = cursor.fetchone()
+        print(current_points)
+
         conn.commit()
         conn.close()
     
+    def get_streak(self, user_id):
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT streak FROM users WHERE user_id = ?", (user_id,))
+        result = cursor.fetchone()
+
+        conn.close()
+        return result
+    
+    # def del_streak(self, user_id):
+    #     conn = sqlite3.connect(self.db_name)
+    #     conn.execute("UPDATE users SET streak = 0 WHERE user_id = ?", (user_id,))
+    #     conn.commit()
+    #     conn.close    
+
+    # def add_streak(self, user_id):
+    #     conn = sqlite3.connect(self.db_name)
+    #     current_date = datetime.now().date()
+    #     target_date = conn.execute("SELECT streak FROM users WHERE user_id = ?", (user_id,)).fetchone()
+    #     print(target_date)
+    #     difference = current_date - target_date
+
+    #     if difference == 1:
+    #        conn.execute("UPDATE users SET streak = streak + 1 WHERE user_id = ?", (user_id,))
+    #     elif difference > 1:
+    #        self.del_streak(user_id)
+
+    #     conn.commit()
+    #     conn.close
+        
     def check_table_empty_flowers(self, conn):
         # Check if the flowers table is empty
         cursor = conn.cursor()
@@ -163,3 +205,34 @@ class DatabaseManager:
 
         conn.commit()
         conn.close()
+
+    def user_exists(self, username):
+        """ Check if a user exists in the database """
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT user_id FROM users WHERE username = ?", (username,))
+        user = cursor.fetchone()
+        
+        conn.close()
+        return user
+    
+    def create_user(self, username):
+        """ Create a new user in the database """
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        cursor.execute("INSERT INTO users (username) VALUES (?)", (username,))
+        conn.commit()
+        user_id = cursor.lastrowid  # Get the last inserted row ID
+
+        conn.close()
+        return user_id
+    
+    def login_or_create_user(self, username):
+        """ Handle user login or create a new user if not exists """
+        user = self.user_exists(username)
+        if user:
+            return user[0]  # user exists, return user_id
+        else:
+            return self.create_user(username)  # create new user and return user_id

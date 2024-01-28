@@ -42,6 +42,7 @@ WindowManager:
                 root.save_btn_press()
                 app.root.current = "main"
                 root.manager.transition.direction = "up"
+
                     
 
 
@@ -115,6 +116,13 @@ WindowManager:
             font_name: 'font'
             color: 0.3, 0.6, 0.6, 1
             pos_hint: {'center_x': 0.85, 'center_y': 0.80}
+        
+        Label:
+            text: root.streak_txt
+            font_size: '30sp'
+            font_name: 'font'
+            color: 0.3, 0.6, 0.6, 1
+            pos_hint: {'center_x': 0.15, 'center_y': 0.80}
 
         Button:
             text: "New Entry"
@@ -147,26 +155,49 @@ WindowManager:
                 root.manager.transition.direction = "left"
         
         Button:
+            btn_id: 1
             size_hint: None, None
             size: '150dp', '150dp'
             pos_hint: {'center_x': 0.2, 'center_y': 0.35}
             background_normal: 'Pot.png'   
-            on_press: root.flower_pot_press()
+            on_press: root.flower_pot_press(self)
+
+        Image:
+            id: flower1
+            source: 'placeholder.png'  
+            size_hint: None, None
+            size: '400dp', '400dp'
+            pos_hint: {'center_x': 0.46, 'center_y': 0.425}
 
         Button:
+            btn_id: 2
             size_hint: None, None
             size: '150dp', '150dp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
             background_normal: 'Pot.png'   
-            on_press: root.flower_pot_press()
+            on_press: root.flower_pot_press(self)
+        
+        Image:
+            id: flower2
+            source: 'placeholder.png'  
+            size_hint: None, None
+            size: '400dp', '400dp'
+            pos_hint: {'center_x': 0.76, 'center_y': 0.425}
         
         Button:
+            btn_id: 3
             size_hint: None, None
             size: '150dp', '150dp'
             pos_hint: {'center_x': 0.8, 'center_y': 0.35}
             background_normal: 'Pot.png'   
             on_press: root.flower_pot_press()
-        
+        Image:
+            id: flower3
+            source: 'placeholder.png'  
+            size_hint: None, None
+            size: '400dp', '400dp'
+            pos_hint: {'center_x': 1.06, 'center_y': 0.425}
+
         Button:
             text: "logout"
             font_name: 'contentfont2.ttf'
@@ -177,8 +208,6 @@ WindowManager:
             on_release:
                 app.root.current = "login"
                 root.manager.transition.direction = "right"
-
-
 <JournalWindow>:
     name: "journal"
     entry: entry
