@@ -61,15 +61,16 @@ class HistoryWindow(Screen):
 
     def confirm_delete(self, item):
         dialog = MDDialog(
-            title="Delete Entry",
-            text="Would you like to delete this entry? This action is irreversible.",
+            title="Delete Entry?",
+            # text="Would you like to delete this entry? This action is irreversible.",
+            text=item.text,
             buttons=[
                 MDFlatButton(
                     text="CANCEL",
                     on_release=lambda x: dialog.dismiss()
                 ),
                 MDFlatButton(
-                    text="CONFIRM",
+                    text="CONFIRM (IRREVERSIBLE)",
                     on_release=lambda x: self.delete_entry(item, dialog)
                 ),
             ],
