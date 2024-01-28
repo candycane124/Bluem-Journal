@@ -30,11 +30,25 @@ class MainWindow(Screen):
     
     def on_start(self):
         Clock.schedule_interval(self.auto_update, 1)   # automatically check the point and update every 1 sec
-    
         
-    def flower_pot_press(self):
+    def flower_pot_press(self, button):
         backend = App.get_running_app().backend
-        backend.buy_flower(1) #fix user id
+        print(button.btn_id)
+        dialog = MDDialog(
+            title="Plant Seed",
+            text="Would you like to buy a new random new flower for 10 points?",
+            buttons=[
+                MDFlatButton(
+                    text="NO",
+                    on_release=lambda x: dialog.dismiss()
+                ),
+                MDFlatButton(
+                    text="YES",
+                    # on_release=lambda x: backend.buy_flower(button.btn_id) # does not work right now due to points being incorrect
+                ),
+            ],
+        )
+        dialog.open()
 
 class Login(Screen):
     def save_btn_press(self):
@@ -156,7 +170,7 @@ class NegativityPebbleApp(Screen):
                 size_hint=(0,0),
                 duration=0.8
             )
-            animate.start(pebble)
+            animate.start(self.ids.pebble)
         except Exception as e:
            print(f"An error occured: {e}")
            import traceback
