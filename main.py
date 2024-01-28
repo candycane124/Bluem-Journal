@@ -85,6 +85,10 @@ class HistoryWindow(Screen):
 
 
 class GratitudeJarApp(Screen):
+    # def add_gratitude(self):
+    #     backend = App.get_running_app().backend
+    #     entered_text = self.entry.text
+    #     self.entry.text = ''
     pass
 
 class WindowManager(ScreenManager):
