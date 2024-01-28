@@ -30,6 +30,9 @@ class Backend:
         entries = self.db_manager.get_all_entries(self.user_id)
         return entries
     
+    def remove_entry(self, entry_id):
+        self.db_manager.remove_entry(entry_id)
+    
     def get_points(self):
         return self.db_manager.get_points(self.user_id)
     

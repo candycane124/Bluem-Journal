@@ -103,6 +103,15 @@ class DatabaseManager:
         conn.close()
         return entries
     
+    def remove_entry(self, entry_id):
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        cursor.execute("DELETE FROM journal_entries WHERE entry_id = ?", (entry_id,))
+    
+        conn.commit()
+        conn.close()
+
     def get_points(self, user_id):
         conn = sqlite3.connect(self.db_name)
         cursor = conn.cursor()
