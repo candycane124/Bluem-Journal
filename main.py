@@ -1,8 +1,14 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import ObjectProperty
 from backend import Backend
+from kivy.core.window import Window
+from kivy.properties import StringProperty
+from kivymd.app import MDApp
+from kivymd.uix.list import OneLineListItem
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
+from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
@@ -14,26 +20,84 @@ from kivy.animation import Animation
 from kivy.uix.widget import Widget
 
 class MainWindow(Screen):
-    pass
+    point_txt = StringProperty("Points: 0")
+    
+    def auto_update(self):
+        backend = App.get_running_app().backend
+        point = backend.get_points()  # this is not working, it gets the value None
+        print(point)
+        self.point_txt = "Points: " + str(point)
+    
+    def on_start(self):
+        Clock.schedule_interval(self.auto_update, 1)   # automatically check the point and update every 1 sec
+    
+        
+    def flower_pot_press(self):
+        backend = App.get_running_app().backend
+        backend.buy_flower(1) #fix user id
+
+class Login(Screen):
+    def save_btn_press(self):
+        backend = App.get_running_app().backend
+        user_id = self.entry.text
+        backend.login(user_id)
+        print(user_id)
+        self.entry.text = ""
 
 class JournalWindow(Screen):
+    feeling_label_text = StringProperty("How are you feeling?")
+
     def save_btn_press(self):
-        self.backend = Backend()
+        backend = App.get_running_app().backend
         entered_text = self.entry.text
-        self.backend.record_entry(123, entered_text) # fix user id
+        backend.record_entry(entered_text) # fix user id  
         print(entered_text)
         self.entry.text = ""
 
-class HistoryWindow(Screen):    
-    def show_btn_press(self):
-        self.backend = Backend()
-        entries = self.backend.get_last_five_entries(123) # fix user id
-        print(entries)
-        finalStr = "" 
+    def ask_btn_press(self):
+        backend = App.get_running_app().backend
+        current_journal_entry = self.entry.text
+        question_prompt = backend.query_chatgpt(current_journal_entry)
+        #question_prompt = "New Question?"
+        self.feeling_label_text = question_prompt
+
+class HistoryWindow(Screen):
+    def addLabels(self):
+        self.entries.clear_widgets()
+        backend = App.get_running_app().backend
+        entries = backend.get_all_entries()
         for entry in entries:
-            finalStr += entry[2] + "\n"
-        self.entries.text = finalStr
-    # pass
+            item = OneLineListItem(text=entry[2])
+            setattr(item, 'entry_id', entry[0])
+            item.bind(on_press=lambda x, item=item: self.confirm_delete(item))
+            item.theme_text_color = "Custom"
+            item.text_color: (0.3, 0.6, 0.6, 1)  
+            self.entries.add_widget(item)
+
+    def confirm_delete(self, item):
+        dialog = MDDialog(
+            title="Delete Entry?",
+            # text="Would you like to delete this entry? This action is irreversible.",
+            text=item.text,
+            buttons=[
+                MDFlatButton(
+                    text="CANCEL",
+                    on_release=lambda x: dialog.dismiss()
+                ),
+                MDFlatButton(
+                    text="CONFIRM (IRREVERSIBLE)",
+                    on_release=lambda x: self.delete_entry(item, dialog)
+                ),
+            ],
+        )
+        dialog.open()
+
+    def delete_entry(self, item, dialog):
+        dialog.dismiss()
+        backend = App.get_running_app().backend
+        backend.remove_entry(item.entry_id)
+        self.entries.remove_widget(item)
+
 
 # class PebbleImage(Image):
 #     def animate_it(self, *args):
@@ -102,14 +166,16 @@ class NegativityPebbleApp(Screen):
 class WindowManager(ScreenManager):
     pass
 
-kv = Builder.load_file("my.kv")
+class MyApp(MDApp):
+    backend = None
 
-class MyApp(App):
     def build(self):
         self.backend = Backend()
-        entry = ObjectProperty(None)
-        entries = ObjectProperty(None)
-        return kv
+        self.title = "name goes here"
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_palette = "Pink"
+        Window.size = (650, 400)
+        return Builder.load_file("my.kv")
 
 if __name__ == "__main__":
     MyApp().run()

@@ -1,90 +1,286 @@
 WindowManager:
+    Login:
     MainWindow:
     JournalWindow:
     HistoryWindow:
     NegativityPebbleApp:
 
+<Login>:
+    name: "login"
+    entry: entry  # Bind the ObjectProperty to the TextInput
+
+    FloatLayout
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
+            keep_ratio: False
+
+        Label:
+            text: "Input your user id"
+            color: 0.3, 0.6, 0.6, 1
+            font_name: 'font'
+            font_size: '40sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+        TextInput:
+            id: entry
+            multiline: False
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.3, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        Button:
+            text: "Submit"
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            on_press:
+                root.save_btn_press()
+                app.root.current = "main"
+                root.manager.transition.direction = "up"
+                    
+
+
+<Login>:
+    name: "login"
+    entry: entry  # Bind the ObjectProperty to the TextInput
+
+    FloatLayout
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
+            keep_ratio: False
+
+        Label:
+            text: "Input your user id"
+            color: 0.3, 0.6, 0.6, 1
+            font_name: 'font'
+            font_size: '40sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+        TextInput:
+            id: entry
+            multiline: False
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.3, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        Button:
+            text: "Submit"
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            on_press:
+                root.save_btn_press()
+                app.root.current = "main"
+                root.manager.transition.direction = "up"
+                    
+
+
 <MainWindow>:
     name: "main"
     
     FloatLayout:
-       
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
+            keep_ratio: False
+
         Label:
             text: "name of app goes here"
+            font_size: '70sp'
+            font_name: 'font'
+            color: 0.3, 0.6, 0.6, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.90}
+
+        Label:
+            text: root.point_txt
             font_size: '30sp'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            font_name: 'font'
+            color: 0.3, 0.6, 0.6, 1
+            pos_hint: {'center_x': 0.85, 'center_y': 0.80}
 
         Button:
             text: "New Entry"
-            size_hint: (0.3, 0.2)
-            pos_hint: {'center_x': 0.2, 'center_y': 0.3}
+            font_name: 'font'
+            font_size: '25sp'
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.2, 'center_y': 0.1}
             on_release:
                 app.root.current = "journal"
                 root.manager.transition.direction = "left"
         
         Button:
             text: "Track Mood"
-            size_hint: (0.3, 0.2)
-            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            font_name: 'font'
+            font_size: '25sp'
+            size_hint: (0.22, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_release:
                 app.root.current = "negativitypebble"
                 root.manager.transition.direction = "left"
 
         Button:
-            text: "See Previous Entries"
-            size_hint: (0.3, 0.2)
-            pos_hint: {'center_x': 0.8, 'center_y': 0.3}
+            text: "Previous Entries"
+            font_name: 'font'
+            font_size: '22sp'
+            size_hint: (0.22, 0.1)
+            pos_hint: {'center_x': 0.8, 'center_y': 0.1}
             on_release:
                 app.root.current = "history"
                 root.manager.transition.direction = "left"
+        
+        Button:
+            size_hint: None, None
+            size: '150dp', '150dp'
+            pos_hint: {'center_x': 0.2, 'center_y': 0.35}
+            background_normal: 'Pot.png'   
+            on_press: root.flower_pot_press()
 
+        Button:
+            size_hint: None, None
+            size: '150dp', '150dp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            background_normal: 'Pot.png'   
+            on_press: root.flower_pot_press()
+        
+        Button:
+            size_hint: None, None
+            size: '150dp', '150dp'
+            pos_hint: {'center_x': 0.8, 'center_y': 0.35}
+            background_normal: 'Pot.png'   
+            on_press: root.flower_pot_press()
 
 <JournalWindow>:
     name: "journal"
-
     entry: entry
 
-    GridLayout:
-        cols: 1
+    FloatLayout:
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
+            keep_ratio: False
 
         Label:
-            text: "How are you feeling?"
+            text: root.feeling_label_text
+            size_hint: 0.8, None
+            text_size: self.width, None
+            halign: 'center'
+            valign: 'middle'
+            multiline: True
+            color: 0.3, 0.6, 0.6, 1
+            font_name: 'font'
+            font_size: '40sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
         
         TextInput:
             id: entry
-            multiline: False
+            hint_text: "start writing..."
+            multiline: True
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.5, 0.3)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        
+        # Label:
+        #     text: "Don't know what to write about?"
 
-        GridLayout:
-            cols: 2
+        # GridLayout:
+        #     cols: 2
 
-            Button:
-                text: "Back"
-                on_release:
-                    app.root.current = "main"
-                    root.manager.transition.direction = "right"
-            
-            Button:
-                text: "Submit"
-                on_press: root.save_btn_press()
+        #     Button:
+        #         text: "Generate new prompt"
+        #         on_press:
+        #             root.new_prompt()
+
+        #     Label:
+        #         id: prompt
+        #         text: ""
+        #         text_size: self.size
+        #         valign: "middle"
+        #         halign: "center"
+
+        # GridLayout:
+        #     cols: 2
+
+        Button:
+            text: "Back"
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.125, 0.1)
+            pos_hint: {'center_x': 0.35, 'center_y': 0.2}
+            on_press:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        Button:
+            text: "Ask"
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.125, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+            on_press:
+                root.ask_btn_press()
+
+        Button:
+            text: "Finish"
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.125, 0.1)
+            pos_hint: {'center_x': 0.65, 'center_y': 0.2}
+            on_press:
+                root.save_btn_press()
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
 
 <HistoryWindow>:
     name: "history"
     entries: entries
 
-    GridLayout:
-        cols: 1
-        # size: root.width, root.height
-
+    FloatLayout:
+        Image:
+            source: 'garden background.png' 
+            size: self.size
+            pos: self.pos
+            allow_stretch: True
+            keep_ratio: False
+    
         Button:
-            text: "show most recent entry"
-            on_press: root.show_btn_press()
+            text: "Display/Update Entries"
+            font_name: 'font'
+            font_size: '25sp'
+            size_hint: (0.5, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+            on_press:
+                root.addLabels()
+                # root.show_btn_press()
 
-        Label:
-            id: entries
-            text: ""
-        
+        MDScrollView:
+            size_hint: (0.5, 0.5)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            MDList:
+                id: entries
+
         Button:
             text: "Back"
+            font_name: 'font'
+            font_size: '30sp'
+            size_hint: (0.2, 0.1)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
@@ -155,3 +351,15 @@ WindowManager:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
 
+
+<P>:
+    Label:
+        text: "You are about to delete an entry! Click elsewhere to dismiss."
+        size_hint: 0.6, 0.2
+        pos_hint: {"x":0.2, "top":1}
+
+    Button:
+        text: "Confirm"
+        size_hint: 0.8, 0.2
+        pos_hint: {"x":0.1, "y":0.1}
+        on_release: root.delete_entry()
