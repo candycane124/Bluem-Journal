@@ -11,9 +11,9 @@ class DatabaseManager:
         cursor = conn.cursor()
 
         ### To reset users table in db
-        #cursor.execute('''
-        #    DROP TABLE IF EXISTS users
-        #    ''')
+        # cursor.execute('''
+        #     DROP TABLE IF EXISTS users
+        #     ''')
 
         # Create the 'users' table
         cursor.execute('''
@@ -195,16 +195,29 @@ class DatabaseManager:
         conn.commit()
         conn.close()
 
-    def add_flower(self, user_id, flower_number, flower_id):
+    def add_flower(self, user_id, pot_number, flower_id):
         """ Add a flower to the specified user """
         conn = sqlite3.connect(self.db_name)
         cursor = conn.cursor()
 
         # Update the specific flower column for the user
-        cursor.execute(f'UPDATE users SET flower{flower_number} = ? WHERE user_id = ?', (flower_id, user_id,))
+        cursor.execute(f'UPDATE users SET flower{pot_number} = ? WHERE user_id = ?', (flower_id, user_id,))
 
         conn.commit()
         conn.close()
+
+    def get_flower_id(self, user_id, pot_number):
+        """ Return flower id so it can be displayed """
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        cursor.execute(f"SELECT flower{pot_number} FROM users WHERE user_id = ?", (user_id,))
+        result = cursor.fetchone()
+
+        conn.close()
+        return result[0]
+
+
 
     def user_exists(self, username):
         """ Check if a user exists in the database """

@@ -26,8 +26,12 @@ class MainWindow(Screen):
     def auto_update(self, dt):
         backend = App.get_running_app().backend
         point = backend.get_points()
-        print(point)
         self.point_txt = f"Points: {point}"
+
+        f1 = backend.get_flower(1)
+        f2 = backend.get_flower(2)
+        f3 = backend.get_flower(3)
+        print(f"1: {f1}\n2: {f2}\n3: {f3}")
     
     def on_enter(self):
         self.auto_update(0)  # Pass dt=0 to simulate an immediate update
@@ -119,6 +123,23 @@ class HistoryWindow(Screen):
 
 
 class NegativityPebbleApp(Screen):
+    def reset_page(self):
+        self.ids.negative_message.text=""
+        self.ids.negative_message.opacity=1
+        self.ids.negative_message.disabled=False
+        self.ids.heading.opacity=1
+        self.ids.heading.disabled=False
+        self.ids.throw_button.opacity=1
+        self.ids.throw_button.disabled=False
+        self.ids.message.opacity=0
+        #reset pebble
+        self.ids.pebble.size_hint=(0.35,0.5)
+        self.ids.pebble.pos_hint={'center_x': 0.5, 'center_y': 0.5} 
+        self.ids.pebble.opacity=1
+    
+    def on_enter(self, *args):
+        self.reset_page()
+
     def add_points(self):
         backend = App.get_running_app().backend
         backend.add_points(1)
@@ -127,23 +148,37 @@ class NegativityPebbleApp(Screen):
         try:
             negative_thought = self.ids.negative_message.text
             print(negative_thought)
-            # self.ids.throww.text = (negative_thought)
             self.ids.heading.opacity=0
             self.ids.heading.disabled=True
             self.ids.negative_message.opacity=0
             self.ids.negative_message.disabled=True
             self.ids.throw_button.opacity=0
             self.ids.throw_button.disabled=True
-            # self.ids.pebble.animate_it()
             animate = Animation(
-                size_hint=(0.5,0.7),
-                duration=0.2
+                size_hint=(0.45,0.65),
+                duration=0.5
             )
             animate += Animation(
+                size_hint=(0.15,0.23),
+                duration=0.25
+            )
+            
+            animate += Animation(
                 size_hint=(0,0),
-                duration=0.8
+                pos_hint={'center_y':0.35},
+                duration=0.34
             )
             animate.start(self.ids.pebble)
+            fade = Animation(
+                opacity=1,
+                duration=2.5 
+            )
+            fade.start(self.ids.message)
+            # fade = Animation(
+            #     opacity=1,
+            #     duration=2
+            # )
+            # fade.start(self.ids.message)
         except Exception as e:
            print(f"An error occured: {e}")
            import traceback
