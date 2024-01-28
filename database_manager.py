@@ -127,6 +127,37 @@ class DatabaseManager:
         conn.commit()
         conn.close()
     
+    def get_streak(self, user_id):
+        conn = sqlite3.connect(self.db_name)
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT streak FROM users WHERE user_id = ?", (user_id,))
+        result = cursor.fetchone()
+
+        conn.close()
+        return result
+    
+    # def del_streak(self, user_id):
+    #     conn = sqlite3.connect(self.db_name)
+    #     conn.execute("UPDATE users SET streak = 0 WHERE user_id = ?", (user_id,))
+    #     conn.commit()
+    #     conn.close    
+
+    # def add_streak(self, user_id):
+    #     conn = sqlite3.connect(self.db_name)
+    #     current_date = datetime.now().date()
+    #     target_date = conn.execute("SELECT streak FROM users WHERE user_id = ?", (user_id,)).fetchone()
+    #     print(target_date)
+    #     difference = current_date - target_date
+
+    #     if difference == 1:
+    #        conn.execute("UPDATE users SET streak = streak + 1 WHERE user_id = ?", (user_id,))
+    #     elif difference > 1:
+    #        self.del_streak(user_id)
+
+    #     conn.commit()
+    #     conn.close
+        
     def check_table_empty_flowers(self, conn):
         # Check if the flowers table is empty
         cursor = conn.cursor()

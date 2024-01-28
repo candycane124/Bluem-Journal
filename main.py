@@ -21,17 +21,19 @@ from kivy.uix.widget import Widget
 
 class MainWindow(Screen):
     point_txt = StringProperty("Points: 0")
-    
-    def auto_update(self):
+    streak_txt = StringProperty("Streak: 0")
+
+    def auto_update(self, dt):
         backend = App.get_running_app().backend
         point = backend.get_points()  # this is not working, it gets the value None
-        print(point)
-        self.point_txt = "Points: " + str(point)
+        self.point_txt = f"Points: {point}"
     
-    def on_start(self):
-        Clock.schedule_interval(self.auto_update, 1)   # automatically check the point and update every 1 sec
+    def on_enter(self):
+        self.auto_update(0)  # Pass dt=0 to simulate an immediate update
+
+        Clock.schedule_interval(self.auto_update, 1)
+
     
-        
     def flower_pot_press(self):
         backend = App.get_running_app().backend
         backend.buy_flower(1) #fix user id
