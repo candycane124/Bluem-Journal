@@ -10,6 +10,7 @@ class Backend:
         self.user_id = None
         self.entry_points_to_add = 2
         self.flower_price = 5
+        self.apikey = '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'
 
     def login(self, username):
         self.user_id = self.db_manager.login_or_create_user(username)
@@ -60,7 +61,7 @@ class Backend:
     def query_chatgpt(self, current_journal_entry):
         client = OpenAI(
             # This is the default and can be omitted
-            api_key='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',
+            api_key=self.apikey,
         )
 
         try:
