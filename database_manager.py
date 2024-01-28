@@ -68,7 +68,6 @@ class DatabaseManager:
         conn.close()
 
         
-
     def record_entry(self, user_id, entry_text, entry_date):
         conn = sqlite3.connect(self.db_name)
         conn.execute('INSERT INTO journal_entries (user_id, entry_text, entry_date) VALUES (?, ?, ?);', (user_id, entry_text, entry_date))
@@ -116,7 +115,7 @@ class DatabaseManager:
         conn = sqlite3.connect(self.db_name)
         cursor = conn.cursor()
 
-        cursor.execute("SELECT points FROM users WHERE user_id = ? ORDER BY entry_date DESC LIMIT 5", (user_id,))
+        cursor.execute("SELECT points FROM users WHERE user_id = ?", (user_id,))
         result = cursor.fetchone()
 
         conn.close()
@@ -124,13 +123,9 @@ class DatabaseManager:
     
     def add_points(self, user_id, points_to_add):
         conn = sqlite3.connect(self.db_name)
-        cursor = conn.cursor()
-
-        cursor.execute("UPDATE users SET points = points + ? WHERE user_id = ?", (points_to_add, user_id))
-        result = cursor.fetchone()
-
+        conn.execute("UPDATE users SET points = points + ? WHERE user_id = ?", (points_to_add, user_id))
+        conn.commit()
         conn.close()
-        return result
     
     def check_table_empty_flowers(self, conn):
         # Check if the flowers table is empty

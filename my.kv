@@ -232,6 +232,7 @@ WindowManager:
 
 <GratitudeJarApp>:
     name: 'gratitude'
+    entry: entry
 
     FloatLayout
 
@@ -249,7 +250,8 @@ WindowManager:
             pos_hint: {'center_x': 0.5, 'center_y': 0.8}
 
         TextInput:
-            hint_text: 'Enter your gratitude'
+            id: entry
+            hint_text: 'Enter your gratitude...'
             multiline: True
             font_name: 'font'
             font_size: '30sp'
@@ -262,7 +264,11 @@ WindowManager:
             font_size: '25sp'
             size_hint: (0.3, 0.1)
             pos_hint: {'center_x': 0.7, 'center_y': 0.2}
-            # on_press: root.add_gratitude(self)
+            on_press: root.add_gratitude()
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
 
         Button:
             text: "Back"

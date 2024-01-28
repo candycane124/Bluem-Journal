@@ -8,16 +8,20 @@ from kivymd.app import MDApp
 from kivymd.uix.list import OneLineListItem
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
+from kivy.clock import Clock
 
 class MainWindow(Screen):
-    point_txt = "Points: 0"
+    point_txt = StringProperty("Points: 0")
     
     def auto_update(self):
         backend = App.get_running_app().backend
-        point = backend.get_points()
+        point = backend.get_points()  # this is not working, it gets the value None
+        print(point)
         self.point_txt = "Points: " + str(point)
-
-    # Clock.schedule_interval(auto_update, 1)   automatically check the point and update every 1 sec
+    
+    def on_start(self):
+        Clock.schedule_interval(self.auto_update, 1)   # automatically check the point and update every 1 sec
+    
         
     def flower_pot_press(self):
         backend = App.get_running_app().backend
@@ -38,6 +42,7 @@ class JournalWindow(Screen):
         backend = App.get_running_app().backend
         entered_text = self.entry.text
         backend.record_entry(entered_text) # fix user id
+        backend.add_points(1)   
         print(entered_text)
         self.entry.text = ""
 
@@ -83,12 +88,7 @@ class HistoryWindow(Screen):
         backend.remove_entry(item.entry_id)
         self.entries.remove_widget(item)
 
-
 class GratitudeJarApp(Screen):
-    # def add_gratitude(self):
-    #     backend = App.get_running_app().backend
-    #     entered_text = self.entry.text
-    #     self.entry.text = ''
     pass
 
 class WindowManager(ScreenManager):
