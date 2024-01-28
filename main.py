@@ -61,7 +61,7 @@ class GratitudeJarApp(Screen):
 class WindowManager(ScreenManager):
     pass
 
-class MyApp(App):
+class MyApp(MDApp):
     backend = None
 
     def build(self):

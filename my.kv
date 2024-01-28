@@ -115,9 +115,8 @@ WindowManager:
 <JournalWindow>:
     name: "journal"
     entry: entry
-    prompt: prompt
 
-    FloatLayout
+    FloatLayout:
         Image:
             source: 'garden background.png' 
             size: self.size
@@ -140,26 +139,26 @@ WindowManager:
             size_hint: (0.5, 0.3)
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
         
-        Label:
-            text: "Don't know what to write about?"
+        # Label:
+        #     text: "Don't know what to write about?"
 
-        GridLayout:
-            cols: 2
+        # GridLayout:
+        #     cols: 2
 
-            Button:
-                text: "Generate new prompt"
-                on_press:
-                    root.new_prompt()
+        #     Button:
+        #         text: "Generate new prompt"
+        #         on_press:
+        #             root.new_prompt()
 
-            Label:
-                id: prompt
-                text: ""
-                text_size: self.size
-                valign: "middle"
-                halign: "center"
+        #     Label:
+        #         id: prompt
+        #         text: ""
+        #         text_size: self.size
+        #         valign: "middle"
+        #         halign: "center"
 
-        GridLayout:
-            cols: 2
+        # GridLayout:
+        #     cols: 2
 
         Button:
             text: "Back"
@@ -188,10 +187,9 @@ WindowManager:
             pos_hint: {'center_x': 0.65, 'center_y': 0.2}
             on_press:
                 root.save_btn_press()
-
-                on_release:
-                    app.root.current = "main"
-                    root.manager.transition.direction = "right"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
 
 <HistoryWindow>:
     name: "history"
