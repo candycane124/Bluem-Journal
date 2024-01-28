@@ -26,8 +26,12 @@ class MainWindow(Screen):
     def auto_update(self, dt):
         backend = App.get_running_app().backend
         point = backend.get_points()
-        print(point)
         self.point_txt = f"Points: {point}"
+
+        f1 = backend.get_flower(1)
+        f2 = backend.get_flower(2)
+        f3 = backend.get_flower(3)
+        print(f"1: {f1}\n2: {f2}\n3: {f3}")
     
     def on_enter(self):
         self.auto_update(0)  # Pass dt=0 to simulate an immediate update
@@ -48,7 +52,7 @@ class MainWindow(Screen):
                 ),
                 MDFlatButton(
                     text="YES",
-                    # on_release=lambda x: backend.buy_flower(button.btn_id)
+                    on_release=lambda x: backend.buy_flower(button.btn_id)
                 ),
             ],
         )
