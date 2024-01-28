@@ -8,11 +8,14 @@ class Backend:
     def __init__(self):
         self.db_manager = DatabaseManager('app_data.db')
         self.user_id = None
-        self.entry_points_to_add = 1
-        self.flower_price = 1
+        self.entry_points_to_add = 2
+        self.flower_price = 5
 
     def login(self, username):
         self.user_id = self.db_manager.login_or_create_user(username)
+
+    def add_points(self, points_to_add):
+        self.db_manager.add_points(self.user_id, points_to_add)
 
     def record_entry(self, entry_text):
         entry_date = datetime.now()

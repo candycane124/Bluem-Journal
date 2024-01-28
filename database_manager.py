@@ -201,7 +201,7 @@ class DatabaseManager:
         cursor = conn.cursor()
 
         # Update the specific flower column for the user
-        cursor.execute(f'UPDATE users SET flower{flower_number} = ? user_id = ?', (flower_id, user_id,))
+        cursor.execute(f'UPDATE users SET flower{flower_number} = ? WHERE user_id = ?', (flower_id, user_id,))
 
         conn.commit()
         conn.close()

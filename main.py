@@ -40,7 +40,7 @@ class MainWindow(Screen):
         print(button.btn_id)
         dialog = MDDialog(
             title="Plant Seed",
-            text="Would you like to buy a new random new flower for 10 points?",
+            text="Would you like to buy a new random new flower for 5 points?",
             buttons=[
                 MDFlatButton(
                     text="NO",
@@ -48,7 +48,8 @@ class MainWindow(Screen):
                 ),
                 MDFlatButton(
                     text="YES",
-                    # on_release=lambda x: backend.buy_flower(button.btn_id)
+                    on_press=lambda x: backend.buy_flower(button.btn_id),
+                    on_release=lambda x: dialog.dismiss()
                 ),
             ],
         )
@@ -68,7 +69,7 @@ class JournalWindow(Screen):
     def save_btn_press(self):
         backend = App.get_running_app().backend
         entered_text = self.entry.text
-        backend.record_entry(entered_text) # fix user id  
+        backend.record_entry(entered_text)
         print(entered_text)
         self.entry.text = ""
 
@@ -117,42 +118,10 @@ class HistoryWindow(Screen):
         self.entries.remove_widget(item)
 
 
-# class PebbleImage(Image):
-#     def animate_it(self, *args):
-#         animate = Animation(
-#             size_hint=(0.5,0.7),
-#             duration=0.2
-#         )
-#         animate += Animation(
-#             size_hint=(0,0), 
-#             duration=0.8
-#         )
-#         animate.start(self)
-    
 class NegativityPebbleApp(Screen):
-    # class PebbleImage(Image):
-    # def animate_it(self, *args):
-    #         animate = Animation(
-    #             size_hint=(0.5,0.7),
-    #             duration=0.2
-    #         )
-    #         animate += Animation(
-    #             size_hint=(0,0),
-    #             duration=0.8
-    #         )
-    #         animate.start(self)
-
-    # def animate_it(self, *args):
-    #     self.ids.pebble.animate_it()
-        # animate = Animation(
-        #     size_hint=(0.5,0.7),
-        #     duration=0.2
-        # )
-        # animate += Animation(
-        #     size_hint=(0,0),
-        #     duration=0.8
-        # )
-        # animate.start(self)
+    def add_points(self):
+        backend = App.get_running_app().backend
+        backend.add_points(1)
 
     def throw_action(self):
         try:

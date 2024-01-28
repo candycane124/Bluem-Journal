@@ -324,9 +324,8 @@ WindowManager:
         Button:
             id: throw_button
             text: 'throw!'
-            on_press: root.throw_action()#root.animate_it(self)
-            # on_press: root.animate_it(pebble)
-            #on_release: root.animate_it(self)
+            on_press: root.throw_action()
+            on_release: root.add_points()
             size_hint: 0.2, 0.1
             pos: 400, 80
             color: 1, 1, 0.8, 1
