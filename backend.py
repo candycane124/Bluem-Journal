@@ -44,7 +44,7 @@ class Backend:
     def query_chatgpt(self, current_journal_entry):
         client = OpenAI(
             # This is the default and can be omitted
-            api_key='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',
+            api_key='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',
         )
 
         try:
