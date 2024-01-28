@@ -224,7 +224,7 @@ class MyApp(MDApp):
         self.title = "Bluem"
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Pink"
-        Window.size = (650, 400)
+        Window.size = (1100, 700)
         return Builder.load_file("my.kv")
 
 if __name__ == "__main__":
