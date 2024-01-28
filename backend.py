@@ -37,6 +37,9 @@ class Backend:
     def get_points(self):
         return self.db_manager.get_points(self.user_id)
     
+    def add_points(self, points_to_add):
+        self.db_manager.addpoints(self.user_id, points_to_add)
+        
     def buy_flower(self, flower_number):
         points = self.db_manager.get_points(self.user_id)
         if points >= self.flower_price:
