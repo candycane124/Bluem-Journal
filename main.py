@@ -226,6 +226,7 @@ class MyApp(MDApp):
         self.theme_cls.primary_palette = "Pink"
         Window.size = (1100, 700)
         return Builder.load_file("my.kv")
+    
 
 if __name__ == "__main__":
     MyApp().run()

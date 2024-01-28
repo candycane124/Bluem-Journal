@@ -24,7 +24,7 @@ WindowManager:
             text: "Input your user id"
             color: 0.4, 0.2, 0.1, 1
             font_name: 'contentfont3'
-            font_size: '20sp'
+            font_size: '30sp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
         TextInput:
@@ -73,14 +73,14 @@ WindowManager:
 
         Label:
             text: root.point_txt
-            font_size: '30sp'
+            font_size: '40sp'
             font_name: 'contentfont3'
             color: 0.4, 0.2, 0.1, 1
             pos_hint: {'center_x': 0.85, 'center_y': 0.90}
         
         Label:
             text: root.streak_txt
-            font_size: '30sp'
+            font_size: '40sp'
             font_name: 'contentfont3'
             color: 0.4, 0.2, 0.1, 1
             pos_hint: {'center_x': 0.15, 'center_y': 0.90}
@@ -88,7 +88,7 @@ WindowManager:
         Button:
             text: "New Entry"
             font_name: 'contentfont3'
-            font_size: '15sp'
+            font_size: '30sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             size_hint: (0.2, 0.1)
@@ -100,7 +100,7 @@ WindowManager:
         Button:
             text: "Negativity Pebble"
             font_name: 'contentfont3'
-            font_size: '15sp'
+            font_size: '30sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             size_hint: (0.22, 0.1)
@@ -112,7 +112,7 @@ WindowManager:
         Button:
             text: "Previous Entries"
             font_name: 'contentfont3'
-            font_size: '15sp'
+            font_size: '30sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             size_hint: (0.22, 0.1)
@@ -169,6 +169,7 @@ WindowManager:
 
         Button:
             text: "logout"
+            font_size: '30sp'
             font_name: 'contentfont3.ttf'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
@@ -343,7 +344,7 @@ WindowManager:
             id: message
             text: 'Your negative thought has been thrown into the pond!'
             text_size: self.width, None
-            font_size: 25
+            font_size: 30
             size_hint_y: None
             font_name: 'contentfont3.ttf'
             pos_hint: {'center_x': 0.5, 'center_y':0.5}
@@ -354,7 +355,7 @@ WindowManager:
         Image:
             id: pebble
             source: 'chomp.png'
-            size_hint: 0.3, 0.5
+            size_hint: 0.3, 0.3
             pos_hint: {'center_x':.5, 'center_y':.5}
             opacity: 1 
             allow_stretch: True
@@ -362,7 +363,7 @@ WindowManager:
         Image:
             id: chew
             source: 'chew.png'
-            size_hint: 0.3, 0.5
+            size_hint: 0.3, 0.3
             pos_hint: {'center_x':.5, 'center_y':.5}
             opacity: 0 
             allow_stretch: True
@@ -374,13 +375,14 @@ WindowManager:
             size_hint: 0.2, 0.1
             pos_hint: {'center_x':.5, 'center_y':.46}
             multiline: False
-            font_size: 15
+            font_size: 25
             font_name: 'contentfont3.ttf'
             background_color: 0,0,0,0
     
         Button:
             id: throw_button
             text: 'throw!'
+            font_size: 35
             font_name: 'contentfont3.ttf'
             on_press: root.throw_action()
             on_release: root.add_points()
@@ -392,6 +394,7 @@ WindowManager:
 
         Button:
             text: "Back"
+            font_size: 30
             font_name: 'contentfont3.ttf'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
