@@ -11,7 +11,7 @@ WindowManager:
 
     FloatLayout
         Image:
-            source: 'greenhousebackground.png' 
+            source: 'fullgreenhouse.png' 
             size: self.size
             pos: self.pos
             allow_stretch: True
@@ -23,24 +23,25 @@ WindowManager:
         Label:
             text: "Input your user id"
             color: 0.4, 0.2, 0.1, 1
-            font_name: 'contentfont2'
+            font_name: 'contentfont3'
             font_size: '20sp'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
         TextInput:
             id: entry
             multiline: False
-            font_name: 'contentfont2'
+            font_name: 'contentfont3'
             font_size: '30sp'
             size_hint: (0.3, 0.1)
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
 
         Button:
             text: "Submit"
-            font_name: 'contentfont2'
+            font_name: 'contentfont3'
             font_size: '30sp'
+            background_color: 1, 0.5, 0.259,1
             size_hint: (0.2, 0.1)
-            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
             on_press:
                 root.save_btn_press()
                 app.root.current = "main"
@@ -72,20 +73,20 @@ WindowManager:
         Label:
             text: root.point_txt
             font_size: '30sp'
-            font_name: 'font'
-            color: 0.3, 0.6, 0.6, 1
-            pos_hint: {'center_x': 0.85, 'center_y': 0.80}
+            font_name: 'contentfont3'
+            color: 0.4, 0.2, 0.1, 1
+            pos_hint: {'center_x': 0.85, 'center_y': 0.90}
         
         Label:
             text: root.streak_txt
             font_size: '30sp'
-            font_name: 'font'
-            color: 0.3, 0.6, 0.6, 1
-            pos_hint: {'center_x': 0.15, 'center_y': 0.80}
+            font_name: 'contentfont3'
+            color: 0.4, 0.2, 0.1, 1
+            pos_hint: {'center_x': 0.15, 'center_y': 0.90}
 
         Button:
             text: "New Entry"
-            font_name: 'contentfont2'
+            font_name: 'contentfont3'
             font_size: '15sp'
             size_hint: (0.2, 0.1)
             pos_hint: {'center_x': 0.2, 'center_y': 0.1}
@@ -95,7 +96,7 @@ WindowManager:
         
         Button:
             text: "Negativity Pebble"
-            font_name: 'contentfont2'
+            font_name: 'contentfont3'
             font_size: '15sp'
             size_hint: (0.22, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.1}
@@ -105,7 +106,7 @@ WindowManager:
 
         Button:
             text: "Previous Entries"
-            font_name: 'contentfont2'
+            font_name: 'contentfont3'
             font_size: '15sp'
             size_hint: (0.22, 0.1)
             pos_hint: {'center_x': 0.8, 'center_y': 0.1}
@@ -159,10 +160,10 @@ WindowManager:
 
         Button:
             text: "logout"
-            font_name: 'contentfont2.ttf'
+            font_name: 'contentfont3.ttf'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
-            pos_hint: {'center_x':0.95, 'center_y':0.95}
+            pos_hint: {'center_x':0.5, 'center_y':0.9}
             size_hint: 0.1, 0.1
             on_release:
                 app.root.current = "login"
@@ -310,7 +311,7 @@ WindowManager:
             id: heading
             text: 'Negativity Pebble'
             font_size: 63
-            font_name: 'titlefont2.ttf'
+            font_name: 'contentfont3.ttf'
             pos_hint: {'center_x': 0.5, 'center_y': 0.8}
             color: 0.4, 0.2, 0.1, 1
         
@@ -329,7 +330,7 @@ WindowManager:
         Image:
             id: pebble
             source: 'pebble.png'
-            size_hint: 0.35, 0.5
+            size_hint: 0.3, 0.5
             pos_hint: {'center_x':.5, 'center_y':.5}
             opacity: 1 
             allow_stretch: True
@@ -342,12 +343,12 @@ WindowManager:
             pos_hint: {'center_x':.5, 'center_y':.5}
             multiline: False
             font_size: 15
-            font_name: 'contentfont2.ttf'
+            font_name: 'contentfont3.ttf'
     
         Button:
             id: throw_button
             text: 'throw!'
-            font_name: 'contentfont2.ttf'
+            font_name: 'contentfont3.ttf'
             on_press: root.throw_action()
             on_release: root.add_points()
             size_hint: 0.2, 0.1
@@ -358,7 +359,7 @@ WindowManager:
 
         Button:
             text: "Back"
-            font_name: 'contentfont2.ttf'
+            font_name: 'contentfont3.ttf'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             pos_hint: {'center_x':0.95, 'center_y':0.95}
