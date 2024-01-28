@@ -50,6 +50,9 @@ class Backend:
             self.db_manager.subtract_points(self.user_id, self.flower_price)
             flower_id = random.randint(1, 9)
             self.db_manager.add_flower(self.user_id, pot_number, flower_id)
+            return True
+        else:
+            return False
 
     def get_flower(self, pot_number):
         return self.db_manager.get_flower_id(self.user_id, pot_number)

@@ -38,7 +38,22 @@ class MainWindow(Screen):
 
         Clock.schedule_interval(self.auto_update, 1)
 
-    
+    def buy_flower(self, pot_number):
+        backend = App.get_running_app().backend
+        buy_success = backend.buy_flower(pot_number)
+        if not buy_success:
+            dialog = MDDialog(
+                title="Not enough points",
+                text="Sorry, but you don't have enough points to buy a new seed. Keep journaling to earn more points!",
+                buttons=[
+                    MDFlatButton(
+                        text="Okay",
+                        on_release=lambda x: dialog.dismiss()
+                    ),
+                ],
+            )
+            dialog.open()
+
     def flower_pot_press(self, button):
         backend = App.get_running_app().backend
         print(button.btn_id)
@@ -52,7 +67,7 @@ class MainWindow(Screen):
                 ),
                 MDFlatButton(
                     text="YES",
-                    on_press=lambda x: backend.buy_flower(button.btn_id),
+                    on_press=lambda x: self.buy_flower(button.btn_id),
                     on_release=lambda x: dialog.dismiss()
                 ),
             ],
