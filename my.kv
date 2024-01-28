@@ -113,6 +113,13 @@ WindowManager:
             background_normal: 'Pot.png'   
             on_press: root.flower_pot_press(self)
 
+        Image:
+            id: flower1
+            source: 'placeholder.png'  
+            size_hint: None, None
+            size: '400dp', '400dp'
+            pos_hint: {'center_x': 0.46, 'center_y': 0.425}
+
         Button:
             btn_id: 2
             size_hint: None, None
@@ -121,6 +128,13 @@ WindowManager:
             background_normal: 'Pot.png'   
             on_press: root.flower_pot_press(self)
         
+        Image:
+            id: flower2
+            source: 'placeholder.png'  
+            size_hint: None, None
+            size: '400dp', '400dp'
+            pos_hint: {'center_x': 0.76, 'center_y': 0.425}
+        
         Button:
             btn_id: 3
             size_hint: None, None
@@ -128,6 +142,13 @@ WindowManager:
             pos_hint: {'center_x': 0.8, 'center_y': 0.35}
             background_normal: 'Pot.png'   
             on_press: root.flower_pot_press(self)
+
+        Image:
+            id: flower3
+            source: 'flowers/f1.png'  
+            size_hint: None, None
+            size: '400dp', '400dp'
+            pos_hint: {'center_x': 1.06, 'center_y': 0.425}
 
 <JournalWindow>:
     name: "journal"
