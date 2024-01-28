@@ -29,9 +29,20 @@ class MainWindow(Screen):
         self.point_txt = f"Points: {point}"
 
         f1 = backend.get_flower(1)
+        if f1 != 0:
+            image_widget = self.ids.flower1
+            image_widget.source = f'flowers/f{f1}.png'
+            print("Image Source:", image_widget.source)
+
         f2 = backend.get_flower(2)
+        if f2 != 0:
+            image_widget = self.ids.flower2
+            image_widget.source = f'flowers/f{f2}.png'
+
         f3 = backend.get_flower(3)
-        print(f"1: {f1}\n2: {f2}\n3: {f3}")
+        if f3 != 0:
+            image_widget = self.ids.flower3
+            image_widget.source = f'flowers/f{f3}.png'
     
     def on_enter(self):
         self.auto_update(0)  # Pass dt=0 to simulate an immediate update

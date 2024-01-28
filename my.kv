@@ -117,7 +117,7 @@ WindowManager:
         Button:
             btn_id: 1
             size_hint: None, None
-            size: '150dp', '150dp'
+            size: '130dp', '130dp'
             pos_hint: {'center_x': 0.2, 'center_y': 0.35}
             background_normal: 'Pot.png'   
             on_press: root.flower_pot_press(self)
@@ -127,12 +127,12 @@ WindowManager:
             source: 'placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
-            pos_hint: {'center_x': 0.46, 'center_y': 0.425}
+            pos_hint: {'center_x': 0.43, 'center_y': 0.435}
 
         Button:
             btn_id: 2
             size_hint: None, None
-            size: '150dp', '150dp'
+            size: '130dp', '130dp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
             background_normal: 'Pot.png'   
             on_press: root.flower_pot_press(self)
@@ -142,21 +142,22 @@ WindowManager:
             source: 'placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
-            pos_hint: {'center_x': 0.76, 'center_y': 0.425}
+            pos_hint: {'center_x': 0.74, 'center_y': 0.437}
         
         Button:
             btn_id: 3
             size_hint: None, None
-            size: '150dp', '150dp'
+            size: '130dp', '130dp'
             pos_hint: {'center_x': 0.8, 'center_y': 0.35}
             background_normal: 'Pot.png'   
-            on_press: root.flower_pot_press()
+            on_press: root.flower_pot_press(self)
+        
         Image:
             id: flower3
             source: 'placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
-            pos_hint: {'center_x': 1.06, 'center_y': 0.425}
+            pos_hint: {'center_x': 1.04, 'center_y': 0.437}
 
         Button:
             text: "logout"
@@ -168,6 +169,7 @@ WindowManager:
             on_release:
                 app.root.current = "login"
                 root.manager.transition.direction = "right"
+            
 <JournalWindow>:
     name: "journal"
     entry: entry
