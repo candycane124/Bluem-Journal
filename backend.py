@@ -8,16 +8,19 @@ class Backend:
     def __init__(self):
         self.db_manager = DatabaseManager('app_data.db')
         self.user_id = None
+        self.entry_points_to_add = 1
         self.flower_price = 1
 
-    def login(self, user_id):
-        self.user_id = user_id
+    def login(self, username):
+        self.user_id = self.db_manager.login_or_create_user(username)
 
     def record_entry(self, entry_text):
         entry_date = datetime.now()
         self.db_manager.record_entry(self.user_id, entry_text, entry_date)
-        points_to_add = 1 # random will need to change
-        self.db_manager.add_points(self.user_id, points_to_add)
+        self.db_manager.add_points(self.user_id, self.entry_points_to_add)
+
+        current_points = self.db_manager.get_points(self.user_id)
+        print(current_points)
     
     def get_last_entry(self):
         return self.db_manager.get_last_text_entry()
