@@ -152,21 +152,21 @@ WindowManager:
             size: '150dp', '150dp'
             pos_hint: {'center_x': 0.2, 'center_y': 0.35}
             background_normal: 'Pot.png'   
-            on_press: root.flower_pot_press()
+            on_press: root.flower_pot_press(1)
 
         Button:
             size_hint: None, None
             size: '150dp', '150dp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
             background_normal: 'Pot.png'   
-            on_press: root.flower_pot_press()
+            on_press: root.flower_pot_press(2)
         
         Button:
             size_hint: None, None
             size: '150dp', '150dp'
             pos_hint: {'center_x': 0.8, 'center_y': 0.35}
             background_normal: 'Pot.png'   
-            on_press: root.flower_pot_press()
+            on_press: root.flower_pot_press(3)
 
 <JournalWindow>:
     name: "journal"

@@ -11,9 +11,9 @@ class DatabaseManager:
         cursor = conn.cursor()
 
         ### To reset users table in db
-        cursor.execute('''
-            DROP TABLE IF EXISTS users
-            ''')
+        #cursor.execute('''
+        #    DROP TABLE IF EXISTS users
+        #    ''')
 
         # Create the 'users' table
         cursor.execute('''

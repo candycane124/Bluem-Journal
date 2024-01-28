@@ -35,9 +35,9 @@ class MainWindow(Screen):
         Clock.schedule_interval(self.auto_update, 1)
 
     
-    def flower_pot_press(self):
+    def flower_pot_press(self, pot_number):
         backend = App.get_running_app().backend
-        backend.buy_flower(1) #fix user id
+        backend.buy_flower(pot_number)
 
 class Login(Screen):
     def save_btn_press(self):
