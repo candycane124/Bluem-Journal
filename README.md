@@ -1,7 +1,7 @@
-# Serenity Journal - SerenityHacks 2024
+# BLUEM Journal - SerenityHacks 2024
 
 ## About the Project
-Serenity Journal is an innovative journaling application developed for the SerenityHacks 2024 hackathon, focusing on mental health and wellness. The application combines the therapeutic practice of journaling with game-like elements to enhance user motivation and satisfaction.
+Bluem is an innovative journaling application developed for the SerenityHacks 2024 hackathon, focusing on mental health and wellness. The application combines the therapeutic practice of journaling with game-like elements to enhance user motivation and satisfaction. Check out https://devpost.com/software/bluem!
 
 ## Key Features
 
@@ -29,7 +29,7 @@ Serenity Journal is an innovative journaling application developed for the Seren
 - **Release Negative Thoughts**: Users can write down negative thoughts and watch as the app performs an animation to symbolically throw these thoughts into a pond, aiding in emotional release.
 
 ## Technologies Used
-- **Frontend**: Kivy (Python)
+- **Frontend**: Kivy/KivyMD (Python)
 - **Backend**: Python
 - **Database**: SQLite
 - **API**: ChatGPT API for reflective journaling prompts
@@ -48,7 +48,7 @@ To get a local copy up and running, follow these simple steps.
    ```
 2. Install required packages
    ```sh
-   pip install kivy openai sqlite3
+   pip install kivy kivymd sqlite3 openai
    ```
 
 ### Usage
