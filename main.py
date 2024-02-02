@@ -21,7 +21,7 @@ from kivy.uix.widget import Widget
 
 class MainWindow(Screen):
     point_txt = StringProperty("Points: 0")
-    streak_txt = StringProperty("Streak: 0")
+    # streak_txt = StringProperty("Streak: 0")
 
     def auto_update(self, dt):
         backend = App.get_running_app().backend
@@ -31,17 +31,23 @@ class MainWindow(Screen):
         f1 = backend.get_flower(1)
         if f1 != 0:
             image_widget = self.ids.flower1
-            image_widget.source = f'flowers/f{f1}.png'
+            image_widget.source = f'assets/flowers/f{f1}.png'
+        else:
+            self.ids.flower1.source = f'assets/img-placeholder.png'
 
         f2 = backend.get_flower(2)
         if f2 != 0:
             image_widget = self.ids.flower2
-            image_widget.source = f'flowers/f{f2}.png'
+            image_widget.source = f'assets/flowers/f{f2}.png'
+        else:
+            self.ids.flower2.source = f'assets/img-placeholder.png'
 
         f3 = backend.get_flower(3)
         if f3 != 0:
             image_widget = self.ids.flower3
-            image_widget.source = f'flowers/f{f3}.png'
+            image_widget.source = f'assets/flowers/f{f3}.png'
+        else:
+            self.ids.flower3.source = f'assets/img-placeholder.png'
 
     def on_enter(self):
         self.auto_update(0)  # Pass dt=0 to simulate an immediate update
@@ -65,7 +71,6 @@ class MainWindow(Screen):
             dialog.open()
 
     def flower_pot_press(self, button):
-        backend = App.get_running_app().backend
         print(button.btn_id)
         dialog = MDDialog(
             title="Plant Seed",
@@ -82,7 +87,7 @@ class MainWindow(Screen):
                 ),
             ],
         )
-        dialog.open()
+        dialog.open()        
 
 class Login(Screen):
     def save_btn_press(self):
@@ -92,6 +97,12 @@ class Login(Screen):
         print(user_id)
         self.entry.text = ""
 
+        # clear/reset pages for new user
+        self.manager.get_screen('history').add_labels()
+        self.manager.get_screen('journal').clear_journal()
+        self.manager.get_screen('journal').feeling_label_text = "How are you feeling?"
+        self.manager.get_screen('negativitypebble').reset_page()
+
 class JournalWindow(Screen):
     feeling_label_text = StringProperty("How are you feeling?")
 
@@ -100,17 +111,19 @@ class JournalWindow(Screen):
         entered_text = self.entry.text
         backend.record_entry(entered_text)
         print(entered_text)
+        self.clear_journal()
+
+    def clear_journal(self):
         self.entry.text = ""
 
     def ask_btn_press(self):
         backend = App.get_running_app().backend
         current_journal_entry = self.entry.text
         question_prompt = backend.query_chatgpt(current_journal_entry)
-        #question_prompt = "New Question?"
         self.feeling_label_text = question_prompt
 
 class HistoryWindow(Screen):
-    def addLabels(self):
+    def add_labels(self):
         self.entries.clear_widgets()
         backend = App.get_running_app().backend
         entries = backend.get_all_entries()
@@ -126,7 +139,6 @@ class HistoryWindow(Screen):
     def confirm_delete(self, item):
         dialog = MDDialog(
             title="Delete Entry?",
-            # text="Would you like to delete this entry? This action is irreversible.",
             text=item.text,
             buttons=[
                 MDFlatButton(
@@ -202,16 +214,10 @@ class NegativityPebbleApp(Screen):
                 duration=2.5 
             )
             fade.start(self.ids.message)
-            # fade = Animation(
-            #     opacity=1,
-            #     duration=2
-            # )
-            # fade.start(self.ids.message)
         except Exception as e:
            print(f"An error occured: {e}")
            import traceback
            traceback.print_exc()
-    pass
 
 class WindowManager(ScreenManager):
     pass
@@ -226,7 +232,6 @@ class MyApp(MDApp):
         self.theme_cls.primary_palette = "Pink"
         Window.size = (1100, 700)
         return Builder.load_file("my.kv")
-    
 
 if __name__ == "__main__":
     MyApp().run()

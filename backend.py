@@ -79,4 +79,9 @@ class Backend:
             return chat_completion.choices[0].message.content
         except Exception as e:
             print(f"An error occurred: {e}")
-            return "How did that make you feel?"
+            
+            prompt_file = open("prompts.txt","r")
+            prompts = prompt_file.read().split(", ")
+            prompt_file.close()
+            
+            return prompts[random.randint(0,199)]

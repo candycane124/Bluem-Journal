@@ -181,7 +181,7 @@ class DatabaseManager:
             if self.check_table_empty_flowers(conn):
                 # Insert flower images
                 for i in range(1, 6):
-                    image_path = f"flowers/f{i}.png"
+                    image_path = f"assets/flowers/f{i}.png"
                     conn.execute('INSERT INTO flowers (image_path) VALUES (?)', (image_path,))
 
     def subtract_points(self, user_id, flower_price):

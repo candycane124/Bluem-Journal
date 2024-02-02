@@ -11,33 +11,33 @@ WindowManager:
 
     FloatLayout
         Image:
-            source: 'fullgreenhouse.png' 
+            source: 'assets/bg-login.png' 
             size: self.size
             pos: self.pos
             allow_stretch: True
             keep_ratio: False
         Image:
-            source: 'logo.png'
+            source: 'assets/logo.png'
             size_hint: 0.66, 0.33
             pos_hint: {'center_x': 0.5, 'center_y': 0.72}
         Label:
             text: "Input your user id"
             color: 0.4, 0.2, 0.1, 1
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '30sp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
         TextInput:
             id: entry
             multiline: False
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '30sp'
             size_hint: (0.3, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.4}
 
         Button:
             text: "Submit"
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '30sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
@@ -47,47 +47,40 @@ WindowManager:
                 root.save_btn_press()
                 app.root.current = "main"
                 root.manager.transition.direction = "up"
-                    
-
 
 <MainWindow>:
     name: "main"
     
     FloatLayout:
         Image:
-            source: 'greenhousebackground.png' 
+            source: 'assets/bg-main.png' 
             size: self.size
             pos: self.pos
             allow_stretch: True
             keep_ratio: False
 
-        # Label:
-        #     text: "Your Greenhouse"
-        #     font_size: '50sp'
-        #     font_name: 'titlefont2.ttf'
-        #     color: 0.4, 0.2, 0.1, 1
         Image:
-            source:'text-yourgreenhouse.png'
+            source:'assets/text-main-yourgreenhouse.png'
             size_hint: 0.66, 0.33
             pos_hint: {'center_x': 0.5, 'center_y': 0.75}
 
         Label:
             text: root.point_txt
             font_size: '40sp'
-            font_name: 'contentfont3'
+            font_name: 'font'
             color: 0.4, 0.2, 0.1, 1
             pos_hint: {'center_x': 0.85, 'center_y': 0.90}
         
-        Label:
-            text: root.streak_txt
-            font_size: '40sp'
-            font_name: 'contentfont3'
-            color: 0.4, 0.2, 0.1, 1
-            pos_hint: {'center_x': 0.15, 'center_y': 0.90}
+        # Label:
+        #     text: root.streak_txt
+        #     font_size: '40sp'
+        #     font_name: 'font'
+        #     color: 0.4, 0.2, 0.1, 1
+        #     pos_hint: {'center_x': 0.15, 'center_y': 0.90}
 
         Button:
             text: "New Entry"
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '30sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
@@ -99,7 +92,7 @@ WindowManager:
         
         Button:
             text: "Negativity Pebble"
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '30sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
@@ -111,7 +104,7 @@ WindowManager:
 
         Button:
             text: "Previous Entries"
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '30sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
@@ -126,12 +119,12 @@ WindowManager:
             size_hint: None, None
             size: '180dp', '180dp'
             pos_hint: {'center_x': 0.2, 'center_y': 0.32}
-            background_normal: 'Pot.png'   
+            background_normal: 'assets/img-main-pot.png'
             on_press: root.flower_pot_press(self)
 
         Image:
             id: flower1
-            source: 'placeholder.png'  
+            source: 'assets/img-placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
             pos_hint: {'center_x': 0.2, 'center_y': 0.5}
@@ -142,12 +135,12 @@ WindowManager:
             size_hint: None, None
             size: '180dp', '180dp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.32}
-            background_normal: 'Pot.png'   
+            background_normal: 'assets/img-main-pot.png'   
             on_press: root.flower_pot_press(self)
         
         Image:
             id: flower2
-            source: 'placeholder.png'  
+            source: 'assets/img-placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -157,12 +150,12 @@ WindowManager:
             size_hint: None, None
             size: '180dp', '180dp'
             pos_hint: {'center_x': 0.8, 'center_y': 0.32}
-            background_normal: 'Pot.png'   
+            background_normal: 'assets/img-main-pot.png'   
             on_press: root.flower_pot_press(self)
         
         Image:
             id: flower3
-            source: 'placeholder.png'  
+            source: 'assets/img-placeholder.png'  
             size_hint: None, None
             size: '400dp', '400dp'
             pos_hint: {'center_x': 0.8, 'center_y': 0.5}
@@ -170,14 +163,14 @@ WindowManager:
         Button:
             text: "logout"
             font_size: '30sp'
-            font_name: 'contentfont3.ttf'
+            font_name: 'font.ttf'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             pos_hint: {'center_x':0.5, 'center_y':0.9}
             size_hint: 0.1, 0.1
             on_release:
                 app.root.current = "login"
-                root.manager.transition.direction = "right"
+                root.manager.transition.direction = "down"
             
 <JournalWindow>:
     name: "journal"
@@ -185,7 +178,7 @@ WindowManager:
 
     FloatLayout:
         Image:
-            source: 'notebook.png' 
+            source: 'assets/bg-journal.png'
             size: self.size
             pos: self.pos
             allow_stretch: True
@@ -199,7 +192,7 @@ WindowManager:
             valign: 'middle'
             multiline: True
             color: 0.4, 0.2, 0.1, 1
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '20sp'
             pos_hint: {'center_x': 0.33, 'center_y': 0.55}
         
@@ -208,36 +201,15 @@ WindowManager:
             hint_text: "start writing..."
             text_color: 0.4, 0.2, 0.1, 1
             multiline: True
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '15sp'
             size_hint: (0.2, 0.5)
             pos_hint: {'center_x': 0.65, 'center_y': 0.5}
             background_color: 0,0,0,0
-        
-        # Label:
-        #     text: "Don't know what to write about?"
-
-        # GridLayout:
-        #     cols: 2
-
-        #     Button:
-        #         text: "Generate new prompt"
-        #         on_press:
-        #             root.new_prompt()
-
-        #     Label:
-        #         id: prompt
-        #         text: ""
-        #         text_size: self.size
-        #         valign: "middle"
-        #         halign: "center"
-
-        # GridLayout:
-        #     cols: 2
 
         Button:
             text: "Back"
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '20sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
@@ -250,7 +222,7 @@ WindowManager:
         Button:
             text: "Ask"
             
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '20sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
@@ -261,7 +233,7 @@ WindowManager:
 
         Button:
             text: "Finish"
-            font_name: 'contentfont3'
+            font_name: 'font'
             font_size: '20sp'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
@@ -279,27 +251,26 @@ WindowManager:
 
     FloatLayout:
         Image:
-            source: 'notepad.png' 
+            source: 'assets/bg-history.png' 
             size: self.size
             pos: self.pos
             allow_stretch: True
             keep_ratio: False
     
         Button:
-            text: "Display/Update Entries"
+            text: "Refresh Entries"
             font_size: '25sp'
-            font_name: 'contentfont3.ttf'
+            font_name: 'font.ttf'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             size_hint: (0.5, 0.1)
             pos_hint: {'center_x': 0.5, 'center_y': 0.85}
             on_press:
-                root.addLabels()
-                # root.show_btn_press()
+                root.add_labels()
 
         MDScrollView:
             size_hint: (0.34, 0.5)
-            font_name: 'contentfont3'
+            font_name: 'font'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
             MDList:
@@ -307,7 +278,7 @@ WindowManager:
 
         Button:
             text: "Back"
-            font_name: 'contentfont3.ttf'
+            font_name: 'font.ttf'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             font_size: '30sp'
@@ -324,10 +295,11 @@ WindowManager:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'pondd.webp'
+            source: 'assets/bg-pebble.webp'
+        
     FloatLayout:
         Image:
-            source: 'pondd.webp'
+            source: 'assets/bg-pebble.webp'
             allow_stretch: True
             keep_ratio: False
             size_hint: 1,1
@@ -336,7 +308,7 @@ WindowManager:
             id: heading
             text: 'Negativity Pebble'
             font_size: 63
-            font_name: 'contentfont3.ttf'
+            font_name: 'font.ttf'
             pos_hint: {'center_x': 0.5, 'center_y': 0.8}
             color: 0.4, 0.2, 0.1, 1
         
@@ -346,7 +318,7 @@ WindowManager:
             text_size: self.width, None
             font_size: 30
             size_hint_y: None
-            font_name: 'contentfont3.ttf'
+            font_name: 'font.ttf'
             pos_hint: {'center_x': 0.5, 'center_y':0.5}
             color: 0.4, 0.2, 0.1, 1
             halign:'center'
@@ -354,7 +326,7 @@ WindowManager:
 
         Image:
             id: pebble
-            source: 'chomp.png'
+            source: 'assets/img-pebble-chomp.png'
             size_hint: 0.3, 0.3
             pos_hint: {'center_x':.5, 'center_y':.5}
             opacity: 1 
@@ -362,7 +334,7 @@ WindowManager:
             keep_ratio: False
         Image:
             id: chew
-            source: 'chew.png'
+            source: 'assets/img-pebble-chew.png'
             size_hint: 0.3, 0.3
             pos_hint: {'center_x':.5, 'center_y':.5}
             opacity: 0 
@@ -376,14 +348,14 @@ WindowManager:
             pos_hint: {'center_x':.5, 'center_y':.46}
             multiline: False
             font_size: 25
-            font_name: 'contentfont3.ttf'
+            font_name: 'font.ttf'
             background_color: 0,0,0,0
     
         Button:
             id: throw_button
             text: 'throw!'
             font_size: 35
-            font_name: 'contentfont3.ttf'
+            font_name: 'font.ttf'
             on_press: root.throw_action()
             on_release: root.add_points()
             size_hint: 0.2, 0.1
@@ -395,7 +367,7 @@ WindowManager:
         Button:
             text: "Back"
             font_size: 30
-            font_name: 'contentfont3.ttf'
+            font_name: 'font.ttf'
             color: 1, 1, 0.8, 1
             background_color: 1, 0.5, 0.259,1
             pos_hint: {'center_x':0.95, 'center_y':0.95}
