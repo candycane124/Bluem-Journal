@@ -43,10 +43,7 @@ To get a local copy up and running, follow these simple steps.
 
 ### Installation
 1. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/SerenityJournal.git
-   ```
-2. Install required packages
+2. Install the required packages
    ```sh
    pip install kivy kivymd sqlite3 openai
    ```
